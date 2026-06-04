@@ -21,6 +21,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/jobs', jobRoutes);
+app.use('/api/resumes', resumeRoutes);
+app.use('/api/roadmap', roadmapRoutes);
+app.use('/api/interview', interviewRoutes);
+app.use('/api/pow', powRoutes);
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
@@ -35,21 +43,11 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/jobs', jobRoutes);
-app.use('/api/resumes', resumeRoutes);
-app.use('/api/roadmap', roadmapRoutes);
-app.use('/api/interview', interviewRoutes);
-app.use('/api/pow', powRoutes);
-
 app.use(notFound);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
-if (process.env.NODE_ENV !== 'production' || process.env.RENDER) {
-  app.listen(PORT, () => console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
-}
+app.listen(PORT, () => console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
 
 module.exports = app;
