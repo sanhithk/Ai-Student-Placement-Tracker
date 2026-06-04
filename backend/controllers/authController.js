@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/User.js');
 const generateToken = require('../utils/generateToken.js');
 const { OAuth2Client } = require('google-auth-library');
+const sendEmail = require('../utils/sendEmail.js');
 
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -124,9 +125,78 @@ const googleAuth = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    Forgot Password - Send OTP
+// @route   POST /api/auth/forgot-password
+// @access  Public
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    res.status(404);
+    throw new Error('There is no user with that email address');
+  }
+
+  // Generate 6-digit OTP
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+  // Set OTP and expiry (10 minutes)
+  user.resetPasswordOtp = otp;
+  user.resetPasswordExpires = Date.now() + 10 * 60 * 1000;
+  await user.save();
+
+  // Send Email
+  try {
+    const message = `Your password reset code is: ${otp}\nThis code is valid for 10 minutes.`;
+    
+    await sendEmail({
+      email: user.email,
+      subject: 'Password Reset Code - AI Placement Tracker',
+      message,
+    });
+
+    res.status(200).json({ success: true, message: 'OTP sent to email' });
+  } catch (error) {
+    user.resetPasswordOtp = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.status(500);
+    throw new Error('Email could not be sent. Please check if EMAIL_USER and EMAIL_PASS are configured.');
+  }
+});
+
+// @desc    Reset Password
+// @route   POST /api/auth/reset-password
+// @access  Public
+const resetPassword = asyncHandler(async (req, res) => {
+  const { email, otp, newPassword } = req.body;
+
+  const user = await User.findOne({
+    email,
+    resetPasswordOtp: otp,
+    resetPasswordExpires: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    res.status(400);
+    throw new Error('Invalid or expired OTP');
+  }
+
+  // Set new password
+  user.password = newPassword;
+  user.resetPasswordOtp = undefined;
+  user.resetPasswordExpires = undefined;
+  await user.save();
+
+  res.status(200).json({ success: true, message: 'Password reset successfully' });
+});
+
 module.exports = {
   authUser,
   registerUser,
   getUserProfile,
   googleAuth,
+  forgotPassword,
+  resetPassword,
 };

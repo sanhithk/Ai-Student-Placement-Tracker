@@ -55,8 +55,26 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const forgotPassword = async (email) => {
+    try {
+      const { data } = await axios.post('/api/auth/forgot-password', { email });
+      return { success: true, message: data.message };
+    } catch (error) {
+      return { success: false, message: error.response?.data?.message || 'Failed to send OTP' };
+    }
+  };
+
+  const resetPassword = async (email, otp, newPassword) => {
+    try {
+      const { data } = await axios.post('/api/auth/reset-password', { email, otp, newPassword });
+      return { success: true, message: data.message };
+    } catch (error) {
+      return { success: false, message: error.response?.data?.message || 'Failed to reset password' };
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, googleLogin, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, googleLogin, logout, forgotPassword, resetPassword }}>
       {!loading && children}
     </AuthContext.Provider>
   );

@@ -31,6 +31,12 @@ const userSchema = mongoose.Schema(
       codechef: { type: String, default: '' },
       codeforces: { type: String, default: '' },
     },
+    resetPasswordOtp: {
+      type: String,
+    },
+    resetPasswordExpires: {
+      type: Date,
+    },
   },
   {
     timestamps: true,
