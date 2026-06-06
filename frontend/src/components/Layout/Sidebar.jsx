@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, FileText, Briefcase, Code, Compass, Video, Settings, LogOut, Sparkles, Zap } from 'lucide-react';
+import { LayoutDashboard, FileText, Briefcase, Code, Compass, Video, Settings, LogOut, Sparkles, Zap, X } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { motion } from 'framer-motion';
 
 
-const Sidebar = () => {
+const Sidebar = ({ onClose }) => {
   const { logout } = useAuth();
   const navItems = [
     { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
@@ -20,8 +20,8 @@ const Sidebar = () => {
 
 
   return (
-    <aside className="w-64 bg-slate-900/50 backdrop-blur-md border-r border-slate-800 h-screen sticky top-0 flex flex-col">
-      <div className="p-6">
+    <aside className="w-72 md:w-64 bg-slate-900 md:bg-slate-900/50 backdrop-blur-xl border-r border-slate-800 h-screen sticky top-0 flex flex-col shadow-2xl md:shadow-none">
+      <div className="p-6 flex justify-between items-center">
         <h1 className="text-xl font-bold text-white flex items-center gap-2">
           <motion.div
             animate={{ rotate: [0, 15, -15, 0] }}
@@ -31,18 +31,22 @@ const Sidebar = () => {
           </motion.div>
           Placement AI
         </h1>
+        <button onClick={onClose} className="md:hidden text-slate-400 hover:text-white p-2">
+          <X size={24} />
+        </button>
       </div>
       
-      <nav className="flex-1 px-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 px-4 space-y-2 overflow-y-auto pb-4">
         {navItems.map((item) => (
           <NavLink
             key={item.name}
             to={item.path}
+            onClick={onClose}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              `flex items-center gap-4 px-4 py-3 rounded-xl text-base md:text-sm font-medium transition-colors ${
                 isActive 
-                  ? 'bg-primary-500/10 text-primary-400' 
-                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                  ? 'bg-primary-500/15 text-primary-400 shadow-[inset_0_0_20px_rgba(99,102,241,0.05)]' 
+                  : 'text-slate-400 hover:bg-slate-800/80 hover:text-slate-200'
               }`
             }
           >
@@ -59,14 +63,15 @@ const Sidebar = () => {
       </nav>
 
       <div className="p-4 border-t border-slate-800">
-        <div className="space-y-1">
+        <div className="space-y-2">
           <NavLink
             to="/settings"
+            onClick={onClose}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              `flex items-center gap-4 px-4 py-3 rounded-xl text-base md:text-sm font-medium transition-colors ${
                 isActive 
-                  ? 'bg-primary-500/10 text-primary-400' 
-                  : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                  ? 'bg-primary-500/15 text-primary-400 shadow-[inset_0_0_20px_rgba(99,102,241,0.05)]' 
+                  : 'text-slate-400 hover:bg-slate-800/80 hover:text-slate-200'
               }`
             }
           >
@@ -75,7 +80,7 @@ const Sidebar = () => {
             </motion.div>
             Settings
           </NavLink>
-          <button onClick={logout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:bg-red-500/10 hover:text-red-500 transition-colors">
+          <button onClick={() => { logout(); onClose?.(); }} className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-base md:text-sm font-medium text-slate-400 hover:bg-red-500/10 hover:text-red-500 transition-colors">
             <motion.div whileHover={{ scale: 1.2, x: 5 }} transition={{ type: "spring", stiffness: 400 }}>
               <LogOut size={20} />
             </motion.div>
