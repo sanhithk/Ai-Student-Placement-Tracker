@@ -7,21 +7,25 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
+const itemVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  show: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 300, damping: 24 } }
+};
+
 const StatCard = ({ title, value, icon: Icon, colorClass }) => (
   <motion.div 
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    whileHover={{ scale: 1.02 }}
+    variants={itemVariants}
+    whileHover={{ scale: 1.03, y: -4 }}
+    className="h-full"
   >
-    <Card className="h-full">
-      <CardBody className="flex items-center gap-4">
-        <div className={`p-4 rounded-full ${colorClass}`}>
-          <Icon size={24} />
+    <Card className="h-full border border-slate-700/30 bg-slate-800/60 backdrop-blur-xl shadow-lg transition-shadow hover:shadow-[0_8px_30px_rgba(99,102,241,0.15)]">
+      <CardBody className="flex items-center gap-5 p-6">
+        <div className={`p-4 rounded-xl ${colorClass}`}>
+          <Icon size={28} />
         </div>
         <div>
-          <p className="text-sm font-medium text-slate-400">{title}</p>
-          <h3 className="text-2xl font-bold text-white">{value}</h3>
+          <p className="text-sm font-semibold tracking-wider text-slate-400 uppercase mb-1">{title}</p>
+          <h3 className="text-3xl font-black text-white">{value}</h3>
         </div>
       </CardBody>
     </Card>
@@ -178,31 +182,50 @@ const Dashboard = () => {
     return <div className="flex items-center justify-center h-64 text-slate-400">Loading your real-time dashboard...</div>;
   }
 
-  return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-white">Welcome back, {user?.name || 'Student'}!</h1>
-        <p className="text-slate-400 mt-1">Here is your live career progression overview.</p>
-      </div>
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      }
+    }
+  };
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
-        <StatCard title="Applications" value={stats.applications} icon={Briefcase} colorClass="bg-blue-900/30 text-blue-400" />
-        <StatCard title="Resume Score" value={stats.resumeScore} icon={FileText} colorClass="bg-emerald-900/30 text-emerald-400" />
-        <Link to="/coding">
-          <StatCard title="Coding Problems" value={stats.codingProblems} icon={Code} colorClass="bg-purple-900/30 text-purple-400 cursor-pointer hover:shadow-md transition-shadow" />
-        </Link>
-        <StatCard title="Interviews" value={stats.interviews} icon={TrendingUp} colorClass="bg-amber-900/30 text-amber-400" />
-        <Link to="/interview">
-          <StatCard title="Mock Interviews" value={stats.mockInterviews} icon={Video} colorClass="bg-pink-900/30 text-pink-400 cursor-pointer hover:shadow-md transition-shadow" />
-        </Link>
-        <StatCard title="Offer Rate" value={`${stats.offerRate}%`} icon={Target} colorClass="bg-indigo-900/30 text-indigo-400" />
-      </div>
+  return (
+    <motion.div 
+      className="space-y-10"
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+    >
+      <motion.div variants={itemVariants}>
+        <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-primary-400">
+          Welcome back, {user?.name || 'Student'}!
+        </h1>
+        <p className="text-slate-400 mt-2 text-lg">Here is your live career progression overview.</p>
+      </motion.div>
 
       <motion.div 
-        className="grid grid-cols-1 lg:grid-cols-3 gap-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+        variants={containerVariants}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        <StatCard title="Applications" value={stats.applications} icon={Briefcase} colorClass="bg-blue-500/20 text-blue-400" />
+        <StatCard title="Resume Score" value={stats.resumeScore} icon={FileText} colorClass="bg-emerald-500/20 text-emerald-400" />
+        <Link to="/coding" className="block h-full">
+          <StatCard title="Coding Problems" value={stats.codingProblems} icon={Code} colorClass="bg-purple-500/20 text-purple-400 cursor-pointer" />
+        </Link>
+        <StatCard title="Interviews" value={stats.interviews} icon={TrendingUp} colorClass="bg-amber-500/20 text-amber-400" />
+        <Link to="/interview" className="block h-full">
+          <StatCard title="Mock Interviews" value={stats.mockInterviews} icon={Video} colorClass="bg-pink-500/20 text-pink-400 cursor-pointer" />
+        </Link>
+        <StatCard title="Offer Rate" value={`${stats.offerRate}%`} icon={Target} colorClass="bg-indigo-500/20 text-indigo-400" />
+      </motion.div>
+
+      <motion.div 
+        variants={itemVariants}
+        className="grid grid-cols-1 lg:grid-cols-3 gap-8"
       >
         <Card className="lg:col-span-2">
           <CardHeader>
@@ -282,10 +305,8 @@ const Dashboard = () => {
       </motion.div>
 
       <motion.div 
-        className="grid grid-cols-1 lg:grid-cols-2 gap-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        variants={itemVariants}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-8"
       >
         <Card>
           <CardHeader>
@@ -323,7 +344,7 @@ const Dashboard = () => {
           </CardBody>
         </Card>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
