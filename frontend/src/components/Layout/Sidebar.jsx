@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { LayoutDashboard, FileText, Briefcase, Code, Compass, Video, Settings, LogOut, Sparkles, Zap } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { motion } from 'framer-motion';
 
 
 const Sidebar = () => {
@@ -22,7 +23,12 @@ const Sidebar = () => {
     <aside className="w-64 bg-slate-900/50 backdrop-blur-md border-r border-slate-800 h-screen sticky top-0 flex flex-col">
       <div className="p-6">
         <h1 className="text-xl font-bold text-white flex items-center gap-2">
-          <Compass className="text-primary-500" />
+          <motion.div
+            animate={{ rotate: [0, 15, -15, 0] }}
+            transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+          >
+            <Compass className="text-primary-500" />
+          </motion.div>
           Placement AI
         </h1>
       </div>
@@ -40,7 +46,13 @@ const Sidebar = () => {
               }`
             }
           >
-            {item.icon}
+            <motion.div
+              whileHover={{ scale: 1.2, rotate: 5 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              {item.icon}
+            </motion.div>
             {item.name}
           </NavLink>
         ))}
@@ -58,11 +70,15 @@ const Sidebar = () => {
               }`
             }
           >
-            <Settings size={20} />
+            <motion.div whileHover={{ scale: 1.2, rotate: 90 }} transition={{ type: "spring", stiffness: 400 }}>
+              <Settings size={20} />
+            </motion.div>
             Settings
           </NavLink>
           <button onClick={logout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-400 hover:bg-red-500/10 hover:text-red-500 transition-colors">
-            <LogOut size={20} />
+            <motion.div whileHover={{ scale: 1.2, x: 5 }} transition={{ type: "spring", stiffness: 400 }}>
+              <LogOut size={20} />
+            </motion.div>
             Logout
           </button>
         </div>

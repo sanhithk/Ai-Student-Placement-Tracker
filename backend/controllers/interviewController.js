@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const { GoogleGenAI } = require('@google/genai');
+const User = require('../models/User.js');
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
@@ -76,6 +77,9 @@ ${transcript}
     
     const textResponse = response.text;
     const cleanedText = textResponse.replace(/```json\n?/g, '').replace(/```/g, '').trim();
+    
+    // Increment the user's mock interview counter
+    await User.findByIdAndUpdate(req.user._id, { $inc: { mockInterviewsAttended: 1 } });
     
     res.json(JSON.parse(cleanedText));
   } catch (error) {

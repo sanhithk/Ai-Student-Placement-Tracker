@@ -75,6 +75,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       role: user.role,
       skills: user.skills,
       codingProfiles: user.codingProfiles,
+      mockInterviewsAttended: user.mockInterviewsAttended || 0,
     });
   } else {
     res.status(404);

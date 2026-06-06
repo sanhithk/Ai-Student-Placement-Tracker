@@ -37,6 +37,10 @@ const userSchema = mongoose.Schema(
     resetPasswordExpires: {
       type: Date,
     },
+    mockInterviewsAttended: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

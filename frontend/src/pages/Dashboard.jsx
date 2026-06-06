@@ -2,22 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import Card, { CardHeader, CardBody } from '../components/UI/Card';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { Briefcase, FileText, Code, TrendingUp } from 'lucide-react';
+import { Briefcase, FileText, Code, TrendingUp, Video } from 'lucide-react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const StatCard = ({ title, value, icon: Icon, colorClass }) => (
-  <Card>
-    <CardBody className="flex items-center gap-4">
-      <div className={`p-4 rounded-full ${colorClass}`}>
-        <Icon size={24} />
-      </div>
-      <div>
-        <p className="text-sm font-medium text-slate-400">{title}</p>
-        <h3 className="text-2xl font-bold text-white">{value}</h3>
-      </div>
-    </CardBody>
-  </Card>
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    whileHover={{ scale: 1.02 }}
+  >
+    <Card className="h-full">
+      <CardBody className="flex items-center gap-4">
+        <div className={`p-4 rounded-full ${colorClass}`}>
+          <Icon size={24} />
+        </div>
+        <div>
+          <p className="text-sm font-medium text-slate-400">{title}</p>
+          <h3 className="text-2xl font-bold text-white">{value}</h3>
+        </div>
+      </CardBody>
+    </Card>
+  </motion.div>
 );
 
 const Dashboard = () => {
@@ -27,6 +35,7 @@ const Dashboard = () => {
     interviews: 0,
     resumeScore: 0,
     codingProblems: 0,
+    mockInterviews: 0,
     chartData: [],
     activities: []
   });
@@ -39,15 +48,17 @@ const Dashboard = () => {
         const config = { headers: { Authorization: `Bearer ${token}` } };
 
         // Fetch all necessary data
-        const [jobsRes, resumesRes, codingRes] = await Promise.all([
+        const [jobsRes, resumesRes, codingRes, profileRes] = await Promise.all([
           axios.get('/api/jobs', config).catch(() => ({ data: [] })),
           axios.get('/api/resumes', config).catch(() => ({ data: [] })),
-          axios.get('/api/users/coding-stats', config).catch(() => ({ data: null }))
+          axios.get('/api/users/coding-stats', config).catch(() => ({ data: null })),
+          axios.get('/api/users/profile', config).catch(() => ({ data: {} }))
         ]);
 
         const jobs = jobsRes.data;
         const resumes = resumesRes.data;
         const coding = codingRes.data;
+        const profile = profileRes.data;
 
         // Process Jobs Data
         let appliedCount = 0;
@@ -104,6 +115,7 @@ const Dashboard = () => {
           interviews: interviewCount,
           resumeScore: latestResume ? latestResume.score : 'N/A',
           codingProblems: solvedProblems,
+          mockInterviews: profile.mockInterviewsAttended || 0,
           chartData,
           activities: displayActivities.length > 0 ? displayActivities : [{text: 'No recent activity yet', time: 'Today'}]
         });
@@ -129,16 +141,24 @@ const Dashboard = () => {
         <p className="text-slate-400 mt-1">Here is your live career progression overview.</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
         <StatCard title="Applications" value={stats.applications} icon={Briefcase} colorClass="bg-blue-900/30 text-blue-400" />
         <StatCard title="Resume Score" value={stats.resumeScore} icon={FileText} colorClass="bg-emerald-900/30 text-emerald-400" />
         <Link to="/coding">
           <StatCard title="Coding Problems" value={stats.codingProblems} icon={Code} colorClass="bg-purple-900/30 text-purple-400 cursor-pointer hover:shadow-md transition-shadow" />
         </Link>
         <StatCard title="Interviews" value={stats.interviews} icon={TrendingUp} colorClass="bg-amber-900/30 text-amber-400" />
+        <Link to="/interview">
+          <StatCard title="Mock Interviews" value={stats.mockInterviews} icon={Video} colorClass="bg-pink-900/30 text-pink-400 cursor-pointer hover:shadow-md transition-shadow" />
+        </Link>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <motion.div 
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
         <Card>
           <CardHeader>
             <h2 className="text-lg font-semibold text-slate-200">Application Status</h2>
@@ -174,7 +194,7 @@ const Dashboard = () => {
             </div>
           </CardBody>
         </Card>
-      </div>
+      </motion.div>
     </div>
   );
 };
