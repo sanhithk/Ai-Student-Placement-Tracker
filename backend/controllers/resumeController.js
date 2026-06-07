@@ -14,7 +14,7 @@ cloudinary.config({
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-const analyzeResumeWithAI = async (resumeText) => {
+const analyzeResumeWithAI = async (resumeText, jobDescription) => {
   try {
     const prompt = `You are an expert ATS and technical recruiter. Analyze the following resume text and provide a structured JSON response.
 Do NOT wrap the response in markdown blocks like \`\`\`json. Return ONLY raw JSON.
@@ -23,6 +23,8 @@ Structure:
 {
   "score": (a number from 0 to 100 representing the ATS score),
   "feedback": (an array of 3-5 specific, actionable strings on how to improve the resume),
+  ${jobDescription ? `"jdMatchScore": (a number from 0 to 100 representing how well the resume matches the provided Job Description),
+  "jdFeedback": (an array of 3-5 strings highlighting missing keywords, skills, or experience from the Job Description),` : ''}
   "parsedData": {
     "skillsExtracted": (array of strings of key technical skills found),
     "recommendation": {
@@ -43,7 +45,12 @@ Structure:
 Resume Text:
 """
 ${resumeText.substring(0, 5000)}
-"""`;
+"""
+${jobDescription ? `
+Job Description:
+"""
+${jobDescription.substring(0, 3000)}
+"""` : ''}`;
 
     const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
@@ -83,6 +90,8 @@ const analyzeResume = asyncHandler(async (req, res) => {
     throw new Error('Please upload a file');
   }
 
+  const { jobDescription } = req.body;
+
   let fileUrl = '';
   let resumeText = '';
 
@@ -108,7 +117,7 @@ const analyzeResume = asyncHandler(async (req, res) => {
   }
 
   // 4. Get AI Analysis
-  const aiResult = await analyzeResumeWithAI(resumeText);
+  const aiResult = await analyzeResumeWithAI(resumeText, jobDescription);
 
   const resume = await Resume.create({
     user: req.user._id,
@@ -117,6 +126,8 @@ const analyzeResume = asyncHandler(async (req, res) => {
     score: aiResult.score,
     feedback: aiResult.feedback,
     parsedData: aiResult.parsedData,
+    jobDescription: jobDescription || '',
+    jdMatchScore: aiResult.jdMatchScore || null,
   });
 
   res.status(201).json(resume);

@@ -59,6 +59,7 @@ const HighlightedText = ({ text, mistakes, activeMistake, setActiveMistake }) =>
 
 const ResumeAnalyzer = () => {
   const [file, setFile] = useState(null);
+  const [jobDescription, setJobDescription] = useState('');
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
@@ -75,6 +76,9 @@ const ResumeAnalyzer = () => {
 
     const formData = new FormData();
     formData.append('resume', file);
+    if (jobDescription.trim()) {
+      formData.append('jobDescription', jobDescription);
+    }
 
     try {
       const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
@@ -130,6 +134,18 @@ const ResumeAnalyzer = () => {
                 </div>
               )}
 
+              <div className="mt-6 w-full max-w-sm">
+                <label className="block text-sm font-medium text-slate-300 mb-2">
+                  Target Job Description (Optional)
+                </label>
+                <textarea
+                  className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors resize-none h-24 custom-scrollbar"
+                  placeholder="Paste the JD here to get a specific match score..."
+                  value={jobDescription}
+                  onChange={(e) => setJobDescription(e.target.value)}
+                ></textarea>
+              </div>
+
               {error && (
                 <div className="mt-4 w-full max-w-sm bg-red-900/30 border border-red-900 text-red-400 p-3 rounded-lg text-sm text-center">
                   {error}
@@ -176,28 +192,75 @@ const ResumeAnalyzer = () => {
           <div className="space-y-6 h-[800px] overflow-y-auto custom-scrollbar pr-2">
             
             <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700">
-              <CardBody className="flex items-center gap-6 p-8">
-                <div className="relative w-28 h-28 flex items-center justify-center shrink-0">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle cx="56" cy="56" r="48" stroke="currentColor" strokeWidth="10" fill="transparent" className="text-slate-800" />
-                    <circle 
-                      cx="56" cy="56" r="48" stroke="currentColor" strokeWidth="10" fill="transparent" 
-                      strokeDasharray={301.59} 
-                      strokeDashoffset={301.59 - (301.59 * result.score) / 100}
-                      className={result.score > 75 ? "text-emerald-500" : "text-amber-500"} 
-                      style={{ transition: 'stroke-dashoffset 1s ease-in-out' }}
-                    />
-                  </svg>
-                  <span className="absolute text-3xl font-black text-white">{result.score}</span>
+              <CardBody className={`grid gap-6 p-8 ${result.jdMatchScore ? 'grid-cols-2' : 'flex items-center'}`}>
+                <div className="flex items-center gap-6 flex-1">
+                  <div className="relative w-28 h-28 flex items-center justify-center shrink-0">
+                    <svg className="w-full h-full transform -rotate-90">
+                      <circle cx="56" cy="56" r="48" stroke="currentColor" strokeWidth="10" fill="transparent" className="text-slate-800" />
+                      <circle 
+                        cx="56" cy="56" r="48" stroke="currentColor" strokeWidth="10" fill="transparent" 
+                        strokeDasharray={301.59} 
+                        strokeDashoffset={301.59 - (301.59 * result.score) / 100}
+                        className={result.score > 75 ? "text-emerald-500" : "text-amber-500"} 
+                        style={{ transition: 'stroke-dashoffset 1s ease-in-out' }}
+                      />
+                    </svg>
+                    <span className="absolute text-3xl font-black text-white">{result.score}</span>
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-white mb-1">Overall ATS</h2>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      {result.score > 75 ? "Highly optimized!" : "Needs improvements."}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h2 className="text-3xl font-bold text-white mb-2">ATS Score</h2>
-                  <p className="text-slate-400 leading-relaxed">
-                    {result.score > 75 ? "Your resume is highly optimized! Fix the minor issues below to perfect it." : "Your resume needs significant improvements to pass the ATS filter."}
-                  </p>
-                </div>
+
+                {result.jdMatchScore && (
+                  <div className="flex items-center gap-6 flex-1 border-l border-slate-700 pl-6">
+                    <div className="relative w-28 h-28 flex items-center justify-center shrink-0">
+                      <svg className="w-full h-full transform -rotate-90">
+                        <circle cx="56" cy="56" r="48" stroke="currentColor" strokeWidth="10" fill="transparent" className="text-slate-800" />
+                        <circle 
+                          cx="56" cy="56" r="48" stroke="currentColor" strokeWidth="10" fill="transparent" 
+                          strokeDasharray={301.59} 
+                          strokeDashoffset={301.59 - (301.59 * result.jdMatchScore) / 100}
+                          className={result.jdMatchScore > 75 ? "text-primary-500" : "text-amber-500"} 
+                          style={{ transition: 'stroke-dashoffset 1s ease-in-out' }}
+                        />
+                      </svg>
+                      <span className="absolute text-3xl font-black text-white">{result.jdMatchScore}</span>
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-white mb-1">JD Match</h2>
+                      <p className="text-slate-400 text-sm leading-relaxed">
+                        {result.jdMatchScore > 75 ? "Strong fit for this role!" : "Missing key requirements."}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </CardBody>
             </Card>
+
+            {result.jdFeedback && result.jdFeedback.length > 0 && (
+              <Card className="border-amber-900/30">
+                <CardHeader className="bg-amber-900/10 border-b border-amber-900/20">
+                  <h3 className="text-lg font-semibold text-amber-400 flex items-center gap-2">
+                    <AlertTriangle size={20} />
+                    Missing JD Keywords & Skills
+                  </h3>
+                </CardHeader>
+                <CardBody>
+                  <ul className="space-y-4">
+                    {result.jdFeedback.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></div>
+                        <span className="text-slate-300 text-sm leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardBody>
+              </Card>
+            )}
 
             {result.parsedData?.mistakes && result.parsedData.mistakes.length > 0 && (
               <Card className="border-red-900/30">

@@ -28,6 +28,14 @@ const resumeSchema = mongoose.Schema(
       type: Object,
       default: {},
     },
+    jobDescription: {
+      type: String,
+      default: '',
+    },
+    jdMatchScore: {
+      type: Number,
+      default: null,
+    },
   },
   {
     timestamps: true,
