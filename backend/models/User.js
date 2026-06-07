@@ -41,6 +41,35 @@ const userSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
+    points: {
+      type: Number,
+      default: 0,
+    },
+    currentStreak: {
+      type: Number,
+      default: 0,
+    },
+    highestStreak: {
+      type: Number,
+      default: 0,
+    },
+    lastChallengeDate: {
+      type: Date,
+    },
+    completedChallenges: [{
+      challenge: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Challenge',
+      },
+      completedAt: {
+        type: Date,
+        default: Date.now,
+      },
+    }],
+    badges: {
+      type: [String],
+      default: [],
+    },
   },
   {
     timestamps: true,

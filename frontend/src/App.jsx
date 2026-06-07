@@ -15,6 +15,7 @@ import CodingStats from './pages/CodingStats';
 import Roadmap from './pages/Roadmap';
 import MockInterview from './pages/MockInterview';
 import ProofOfWork from './pages/ProofOfWork';
+import Leaderboard from './pages/Leaderboard';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
             <Route path="interview" element={<MockInterview />} />
             <Route path="pow" element={<ProofOfWork />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="leaderboard" element={<Leaderboard />} />
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>

@@ -13,6 +13,7 @@ const resumeRoutes = require('./routes/resumeRoutes.js');
 const roadmapRoutes = require('./routes/roadmapRoutes.js');
 const interviewRoutes = require('./routes/interviewRoutes.js');
 const powRoutes = require('./routes/powRoutes.js');
+const challengeRoutes = require('./routes/challengeRoutes.js');
 
 connectDB();
 
@@ -28,6 +29,7 @@ app.use('/api/resumes', resumeRoutes);
 app.use('/api/roadmap', roadmapRoutes);
 app.use('/api/interview', interviewRoutes);
 app.use('/api/pow', powRoutes);
+app.use('/api/challenges', challengeRoutes);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));

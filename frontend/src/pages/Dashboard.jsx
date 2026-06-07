@@ -6,6 +6,7 @@ import { Briefcase, FileText, Code, TrendingUp, Video, Target, Sparkles, Award }
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import DailyChallenge from '../components/DailyChallenge';
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30, scale: 0.95 },
@@ -205,6 +206,10 @@ const Dashboard = () => {
           Welcome back, {user?.name || 'Student'}!
         </h1>
         <p className="text-slate-400 mt-2 text-lg">Here is your live career progression overview.</p>
+      </motion.div>
+
+      <motion.div variants={itemVariants}>
+        <DailyChallenge />
       </motion.div>
 
       <motion.div 
