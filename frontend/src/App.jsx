@@ -16,6 +16,7 @@ import Roadmap from './pages/Roadmap';
 import MockInterview from './pages/MockInterview';
 import ProofOfWork from './pages/ProofOfWork';
 import Leaderboard from './pages/Leaderboard';
+import PublicProfile from './pages/PublicProfile';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/resume/:shareId" element={<PublicProfile />} />
           
           <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
             <Route index element={<Dashboard />} />

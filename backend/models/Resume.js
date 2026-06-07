@@ -36,6 +36,11 @@ const resumeSchema = mongoose.Schema(
       type: Number,
       default: null,
     },
+    shareId: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
   },
   {
     timestamps: true,

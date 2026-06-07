@@ -64,6 +64,8 @@ const ResumeAnalyzer = () => {
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
   const [activeMistake, setActiveMistake] = useState(null);
+  const [shareLink, setShareLink] = useState('');
+  const [isSharing, setIsSharing] = useState(false);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -96,6 +98,25 @@ const ResumeAnalyzer = () => {
       setError(err.response?.data?.message || 'Failed to upload and analyze resume. Please try again.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleShare = async () => {
+    if (!result?._id) return;
+    setIsSharing(true);
+    try {
+      const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
+      const { data } = await axios.post(`/api/resumes/${result._id}/share`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const link = `${window.location.origin}/resume/${data.shareId}`;
+      setShareLink(link);
+      navigator.clipboard.writeText(link);
+    } catch (err) {
+      console.error(err);
+      alert('Failed to generate share link');
+    } finally {
+      setIsSharing(false);
     }
   };
 
@@ -174,9 +195,16 @@ const ResumeAnalyzer = () => {
                 <FileText size={20} className="text-primary-500" />
                 Parsed Resume
               </h3>
-              <Button onClick={() => setResult(null)} variant="secondary" className="text-xs py-1.5 px-3">
-                Upload New
-              </Button>
+              <div className="flex gap-2">
+                {result._id && (
+                  <Button onClick={handleShare} variant="outline" className="text-xs py-1.5 px-3 border-primary-500/50 text-primary-400 hover:bg-primary-500/10" disabled={isSharing}>
+                    {shareLink ? 'Link Copied!' : (isSharing ? 'Generating...' : 'Make Public & Share')}
+                  </Button>
+                )}
+                <Button onClick={() => setResult(null)} variant="secondary" className="text-xs py-1.5 px-3">
+                  Upload New
+                </Button>
+              </div>
             </CardHeader>
             <CardBody className="overflow-y-auto p-6 custom-scrollbar bg-slate-950">
               <HighlightedText 

@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const cloudinary = require('cloudinary').v2;
 const fs = require('fs');
+const crypto = require('crypto');
 const pdfParse = require('pdf-parse');
 const { GoogleGenAI } = require('@google/genai');
 const Resume = require('../models/Resume.js');
@@ -141,7 +142,55 @@ const getResumes = asyncHandler(async (req, res) => {
   res.json(resumes);
 });
 
+// @desc    Generate a shareable link for a resume
+// @route   POST /api/resumes/:id/share
+// @access  Private
+const generateShareLink = asyncHandler(async (req, res) => {
+  const resume = await Resume.findById(req.params.id);
+
+  if (!resume) {
+    res.status(404);
+    throw new Error('Resume not found');
+  }
+
+  if (resume.user.toString() !== req.user._id.toString()) {
+    res.status(401);
+    throw new Error('Not authorized');
+  }
+
+  if (!resume.shareId) {
+    resume.shareId = crypto.randomBytes(8).toString('hex');
+    await resume.save();
+  }
+
+  res.json({ shareId: resume.shareId });
+});
+
+// @desc    Get a public resume by shareId
+// @route   GET /api/resumes/public/:shareId
+// @access  Public
+const getPublicResume = asyncHandler(async (req, res) => {
+  const resume = await Resume.findOne({ shareId: req.params.shareId }).populate('user', 'name');
+
+  if (!resume || !resume.shareId) {
+    res.status(404);
+    throw new Error('Public resume not found');
+  }
+
+  res.json({
+    user: resume.user.name,
+    score: resume.score,
+    jdMatchScore: resume.jdMatchScore,
+    feedback: resume.feedback,
+    parsedData: resume.parsedData,
+    jobDescription: resume.jobDescription,
+    createdAt: resume.createdAt,
+  });
+});
+
 module.exports = {
   analyzeResume,
   getResumes,
+  generateShareLink,
+  getPublicResume,
 };
