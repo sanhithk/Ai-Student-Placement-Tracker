@@ -64,7 +64,7 @@ const Leaderboard = () => {
           </CardHeader>
           <CardBody className="p-0">
             <div className="divide-y divide-slate-800/50">
-              {users.map((u, index) => (
+              {users.slice(0, 4).map((u, index) => (
                 <motion.div 
                   key={u._id}
                   initial={{ opacity: 0, x: -20 }}
