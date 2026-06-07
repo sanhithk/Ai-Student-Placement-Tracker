@@ -9,6 +9,8 @@ const DailyChallenge = () => {
   const [loading, setLoading] = useState(true);
   const [completing, setCompleting] = useState(false);
   const [completedState, setCompletedState] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     fetchChallenge();
@@ -30,16 +32,23 @@ const DailyChallenge = () => {
   const handleComplete = async () => {
     if (!challengeData?.challenge) return;
     
+    if (challengeData.challenge.type === 'quiz' && !selectedOption) {
+      setError('Please select an option first!');
+      return;
+    }
+
     setCompleting(true);
+    setError('');
     try {
       const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
       const config = { headers: { Authorization: `Bearer ${token}` } };
-      const { data } = await axios.post(`/api/challenges/${challengeData.challenge._id}/complete`, {}, config);
+      const { data } = await axios.post(`/api/challenges/${challengeData.challenge._id}/complete`, { answer: selectedOption }, config);
       
       setCompletedState(data);
       setChallengeData({ hasCompletedToday: true });
-    } catch (error) {
-      console.error("Error completing challenge:", error);
+    } catch (err) {
+      setError(err.response?.data?.message || 'Error completing challenge');
+      console.error("Error completing challenge:", err);
     } finally {
       setCompleting(false);
     }
@@ -147,34 +156,47 @@ const DailyChallenge = () => {
     <Card className="border-primary-500/30 bg-gradient-to-br from-slate-800 to-slate-900 shadow-[0_0_40px_rgba(99,102,241,0.1)] relative overflow-hidden group">
       <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary-400 to-indigo-600" />
       <CardBody className="p-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-xl bg-primary-500/20 text-primary-400 flex items-center justify-center shrink-0">
-              <Target size={24} />
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-bold text-primary-400 uppercase tracking-wider bg-primary-500/10 px-2 py-0.5 rounded">Daily Challenge</span>
-                <span className="flex items-center text-xs font-bold text-yellow-400 bg-yellow-400/10 px-2 py-0.5 rounded">
-                  <Zap size={12} className="mr-1" /> {chal.points} XP
-                </span>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-1">{chal.title}</h3>
-              <p className="text-slate-400 text-sm leading-relaxed max-w-2xl">{chal.description}</p>
-            </div>
+        <div className="flex items-start gap-4 mb-4">
+          <div className="w-12 h-12 rounded-xl bg-primary-500/20 text-primary-400 flex items-center justify-center shrink-0">
+            <Target size={24} />
           </div>
-          
-          <div className="w-full md:w-auto flex justify-end shrink-0">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleComplete}
-              disabled={completing}
-              className="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-500 hover:to-indigo-500 text-white font-bold shadow-lg shadow-primary-500/25 flex items-center justify-center gap-2 transition-all disabled:opacity-70"
-            >
-              {completing ? 'Completing...' : 'Complete Challenge'} <CheckCircle2 size={18} />
-            </motion.button>
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-xs font-bold text-primary-400 uppercase tracking-wider bg-primary-500/10 px-2 py-0.5 rounded">Daily Challenge</span>
+              <span className="flex items-center text-xs font-bold text-yellow-400 bg-yellow-400/10 px-2 py-0.5 rounded">
+                <Zap size={12} className="mr-1" /> {chal.points} XP
+              </span>
+            </div>
+            <h3 className="text-xl font-bold text-white mb-1">{chal.title}</h3>
+            <p className="text-slate-400 text-sm leading-relaxed max-w-2xl">{chal.description}</p>
           </div>
+        </div>
+
+        {chal.type === 'quiz' && (
+          <div className="w-full space-y-3 mt-6 mb-6">
+            {chal.options?.map((opt, i) => (
+              <button 
+                key={i} 
+                onClick={() => { setSelectedOption(opt); setError(''); }}
+                className={`w-full text-left px-4 py-3 rounded-xl border transition-all ${selectedOption === opt ? 'bg-primary-500/20 border-primary-500 text-primary-300' : 'bg-slate-800/50 border-slate-700 text-slate-300 hover:bg-slate-800 hover:border-slate-600'}`}
+              >
+                {opt}
+              </button>
+            ))}
+            {error && <p className="text-red-400 text-sm mt-2">{error}</p>}
+          </div>
+        )}
+        
+        <div className="flex justify-end mt-4">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleComplete}
+            disabled={completing}
+            className="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-500 hover:to-indigo-500 text-white font-bold shadow-lg shadow-primary-500/25 flex items-center justify-center gap-2 transition-all disabled:opacity-70"
+          >
+            {completing ? 'Checking...' : 'Submit Answer'} <CheckCircle2 size={18} />
+          </motion.button>
         </div>
       </CardBody>
     </Card>

@@ -54,12 +54,25 @@ const getDailyChallenge = asyncHandler(async (req, res) => {
 // @access  Private
 const completeChallenge = asyncHandler(async (req, res) => {
   const challengeId = req.params.id;
+  const { answer } = req.body;
   const user = await User.findById(req.user._id);
   const challenge = await Challenge.findById(challengeId);
 
   if (!user || !challenge) {
     res.status(404);
     throw new Error('User or Challenge not found');
+  }
+
+  // Validate Quiz Answer
+  if (challenge.type === 'quiz') {
+    if (!answer) {
+      res.status(400);
+      throw new Error('Please select an answer');
+    }
+    if (answer !== challenge.correctAnswer) {
+      res.status(400);
+      throw new Error('Incorrect answer, try again!');
+    }
   }
 
   const today = new Date();

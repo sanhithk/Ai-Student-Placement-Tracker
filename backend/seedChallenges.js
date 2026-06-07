@@ -44,6 +44,43 @@ const challenges = [
     description: 'Solve one easy algorithm problem on LeetCode and verify your Coding Stats update.',
     type: 'action',
     points: 30
+  },
+  {
+    title: 'CS Trivia: Big O Notation',
+    description: 'What is the time complexity of accessing an element in an array by its index?',
+    type: 'quiz',
+    points: 15,
+    options: ['O(1)', 'O(n)', 'O(log n)', 'O(n^2)'],
+    correctAnswer: 'O(1)'
+  },
+  {
+    title: 'CS Trivia: Data Structures',
+    description: 'Which data structure uses LIFO (Last In First Out) principle?',
+    type: 'quiz',
+    points: 15,
+    options: ['Queue', 'Stack', 'Linked List', 'Tree'],
+    correctAnswer: 'Stack'
+  },
+  {
+    title: 'CS Trivia: Networking',
+    description: 'Which HTTP method is typically used to update an existing resource?',
+    type: 'quiz',
+    points: 15,
+    options: ['GET', 'POST', 'PUT', 'DELETE'],
+    correctAnswer: 'PUT'
+  },
+  {
+    title: 'CS Trivia: Databases',
+    description: 'What does ACID stand for in the context of databases?',
+    type: 'quiz',
+    points: 20,
+    options: [
+      'Automatic, Consistent, Isolated, Durable',
+      'Atomicity, Consistency, Isolation, Durability',
+      'Asynchronous, Concurrent, Indexed, Distributed',
+      'Accurate, Calculated, Integrated, Dependable'
+    ],
+    correctAnswer: 'Atomicity, Consistency, Isolation, Durability'
   }
 ];
 
