@@ -271,8 +271,8 @@ const ResumeAnalyzer = () => {
 
             {result.jdFeedback && result.jdFeedback.length > 0 && (
               <Card className="border-amber-900/30">
-                <CardHeader className="bg-amber-900/10 border-b border-amber-900/20">
-                  <h3 className="text-lg font-semibold text-amber-400 flex items-center gap-2">
+                <CardHeader className="bg-amber-50 dark:bg-amber-900/10 border-b border-amber-200 dark:border-amber-900/20">
+                  <h3 className="text-lg font-semibold text-amber-600 dark:text-amber-400 flex items-center gap-2">
                     <AlertTriangle size={20} />
                     Missing JD Keywords & Skills
                   </h3>
@@ -291,9 +291,9 @@ const ResumeAnalyzer = () => {
             )}
 
             {result.parsedData?.mistakes && result.parsedData.mistakes.length > 0 && (
-              <Card className="border-red-900/30">
-                <CardHeader className="bg-red-900/10 border-b border-red-900/20">
-                  <h3 className="text-lg font-semibold text-red-400 flex items-center gap-2">
+              <Card className="border-red-200 dark:border-red-900/30">
+                <CardHeader className="bg-red-50 dark:bg-red-900/10 border-b border-red-200 dark:border-red-900/20">
+                  <h3 className="text-lg font-semibold text-red-600 dark:text-red-400 flex items-center gap-2">
                     <AlertTriangle size={20} />
                     Critical Mistakes Found
                   </h3>
@@ -308,7 +308,7 @@ const ResumeAnalyzer = () => {
                         className={`p-5 cursor-pointer transition-colors ${activeMistake === mistake ? 'bg-slate-50/80 dark:bg-slate-800/80 border-l-4 border-l-red-500' : 'hover:bg-slate-50/40 dark:bg-slate-800/40 border-l-4 border-l-transparent'}`}
                       >
                         <div className="flex items-start gap-3 mb-3">
-                          <span className="w-6 h-6 rounded-full bg-red-900/50 text-red-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+                          <span className="w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/50 text-red-600 dark:text-red-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
                             {idx + 1}
                           </span>
                           <div>
