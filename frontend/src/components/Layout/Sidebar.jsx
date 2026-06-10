@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, FileText, Briefcase, Code, Compass, Video, Settings, LogOut, Sparkles, Zap, X, Trophy } from 'lucide-react';
+import { LayoutDashboard, FileText, Briefcase, Code, Compass, Video, Settings, LogOut, Sparkles, Zap, X, Trophy, Target, Building2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { motion } from 'framer-motion';
 
@@ -17,6 +17,8 @@ const Sidebar = ({ onClose }) => {
     { name: 'Proof of Work', path: '/pow', icon: <Zap size={20} className="text-amber-400" /> },
     { name: 'Mock Interview', path: '/interview', icon: <Video size={20} /> },
     { name: 'Leaderboard', path: '/leaderboard', icon: <Trophy size={20} className="text-yellow-400" /> },
+    { name: 'Placement Readiness', path: '/readiness', icon: <Target size={20} className="text-emerald-400" /> },
+    { name: 'Company Hub', path: '/companies', icon: <Building2 size={20} className="text-sky-400" /> },
   ];
 
 

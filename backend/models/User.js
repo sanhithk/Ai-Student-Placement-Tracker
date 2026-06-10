@@ -70,6 +70,13 @@ const userSchema = mongoose.Schema(
       type: [String],
       default: [],
     },
+    readinessProfile: {
+      dsaScore: { type: Number, default: 0 },
+      aptitudeScore: { type: Number, default: 0 },
+      projectScore: { type: Number, default: 0 },
+      averageInterviewScore: { type: Number, default: 0 },
+      overallScore: { type: Number, default: 0 }
+    },
   },
   {
     timestamps: true,

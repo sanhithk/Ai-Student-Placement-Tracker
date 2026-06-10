@@ -17,6 +17,9 @@ import MockInterview from './pages/MockInterview';
 import ProofOfWork from './pages/ProofOfWork';
 import Leaderboard from './pages/Leaderboard';
 import PublicProfile from './pages/PublicProfile';
+import PlacementReadiness from './pages/PlacementReadiness';
+import CompanyHub from './pages/CompanyHub';
+import CompanyProfile from './pages/CompanyProfile';
 
 function App() {
 
@@ -39,6 +42,9 @@ function App() {
             <Route path="pow" element={<ProofOfWork />} />
             <Route path="settings" element={<Settings />} />
             <Route path="leaderboard" element={<Leaderboard />} />
+            <Route path="readiness" element={<PlacementReadiness />} />
+            <Route path="companies" element={<CompanyHub />} />
+            <Route path="company/:id" element={<CompanyProfile />} />
 
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
