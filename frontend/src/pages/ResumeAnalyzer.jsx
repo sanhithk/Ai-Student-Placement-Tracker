@@ -219,7 +219,7 @@ const ResumeAnalyzer = () => {
           {/* RIGHT COLUMN: The Feedback & Scores */}
           <div className="space-y-6 h-[800px] overflow-y-auto custom-scrollbar pr-2">
             
-            <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border-slate-200 dark:border-slate-700">
+            <Card className="bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-800 border-slate-200 dark:border-slate-700 shadow-xl">
               <CardBody className={`grid gap-6 p-8 ${result.jdMatchScore ? 'grid-cols-2' : 'flex items-center'}`}>
                 <div className="flex items-center gap-6 flex-1">
                   <div className="relative w-28 h-28 flex items-center justify-center shrink-0">
@@ -316,9 +316,9 @@ const ResumeAnalyzer = () => {
                             <p className="text-slate-600 dark:text-slate-400 text-xs mt-1 font-mono italic bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800 line-clamp-2">"{mistake.quote}"</p>
                           </div>
                         </div>
-                        <div className="ml-9 bg-emerald-900/20 border border-emerald-900/30 p-3 rounded-lg">
-                          <span className="text-xs font-bold text-emerald-500 uppercase tracking-wider block mb-1">How to fix it</span>
-                          <p className="text-emerald-100 text-sm">{mistake.correction}</p>
+                        <div className="ml-9 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-900/30 p-3 rounded-lg">
+                          <span className="text-xs font-bold text-emerald-600 dark:text-emerald-500 uppercase tracking-wider block mb-1">How to fix it</span>
+                          <p className="text-emerald-900 dark:text-emerald-100 text-sm">{mistake.correction}</p>
                         </div>
                       </div>
                     ))}
@@ -361,7 +361,7 @@ const ResumeAnalyzer = () => {
                   <div className="flex flex-wrap gap-4">
                     {result.parsedData.recommendation.searchKeywords?.map((keyword, idx) => (
                       <div key={idx} className="flex flex-col gap-2 bg-white/50 dark:bg-slate-900/50 p-3 rounded-lg border border-slate-200/50 dark:border-slate-700/50 flex-1 min-w-[200px]">
-                        <span className="text-primary-300 font-medium text-sm">
+                        <span className="text-primary-600 dark:text-primary-300 font-medium text-sm">
                           {keyword}
                         </span>
                         <div className="flex items-center gap-4">
