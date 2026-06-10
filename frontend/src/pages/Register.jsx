@@ -55,8 +55,8 @@ const Register = () => {
           <div className="flex justify-center mb-4">
             <Compass size={48} className="text-primary-600" />
           </div>
-          <h2 className="text-3xl font-bold text-white">Create an account</h2>
-          <p className="mt-2 text-sm text-slate-400">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white">Create an account</h2>
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
             Start tracking your career journey today
           </p>
         </div>
@@ -114,10 +114,10 @@ const Register = () => {
             <div className="mt-6">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-slate-700"></div>
+                  <div className="w-full border-t border-slate-200 dark:border-slate-700"></div>
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-slate-800 text-slate-400">Or continue with</span>
+                  <span className="px-2 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Or continue with</span>
                 </div>
               </div>
 
@@ -134,7 +134,7 @@ const Register = () => {
             </div>
 
             <div className="mt-6 text-center text-sm">
-              <span className="text-slate-400">Already have an account? </span>
+              <span className="text-slate-600 dark:text-slate-400">Already have an account? </span>
               <Link to="/login" className="text-primary-500 font-medium hover:text-primary-400">
                 Sign in
               </Link>

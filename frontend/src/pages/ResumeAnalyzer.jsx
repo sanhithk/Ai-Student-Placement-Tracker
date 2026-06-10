@@ -35,7 +35,7 @@ const HighlightedText = ({ text, mistakes, activeMistake, setActiveMistake }) =>
   });
 
   return (
-    <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed text-slate-300">
+    <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed text-slate-700 dark:text-slate-300">
       {parts.map((part, i) => 
         part.isMatch ? (
           <span 
@@ -43,7 +43,7 @@ const HighlightedText = ({ text, mistakes, activeMistake, setActiveMistake }) =>
             onClick={() => setActiveMistake(part.mistake)}
             className={`cursor-pointer transition-colors px-0.5 rounded ${
               activeMistake === part.mistake 
-                ? 'bg-red-500/40 underline decoration-red-500 decoration-wavy text-white shadow-[0_0_10px_rgba(239,68,68,0.3)]' 
+                ? 'bg-red-500/40 underline decoration-red-500 decoration-wavy text-slate-900 dark:text-white shadow-[0_0_10px_rgba(239,68,68,0.3)]' 
                 : 'bg-red-500/10 underline decoration-red-500/50 decoration-wavy hover:bg-red-500/30'
             }`}
           >
@@ -123,17 +123,17 @@ const ResumeAnalyzer = () => {
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-white">AI Resume Analyzer</h1>
-        <p className="text-slate-400 mt-1 max-w-2xl mx-auto">Upload your resume to get instant AI-driven feedback, ATS scoring, and visual mistake highlighting.</p>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">AI Resume Analyzer</h1>
+        <p className="text-slate-600 dark:text-slate-400 mt-1 max-w-2xl mx-auto">Upload your resume to get instant AI-driven feedback, ATS scoring, and visual mistake highlighting.</p>
       </div>
 
       {!result ? (
         <div className="max-w-3xl mx-auto">
           <Card>
-            <CardBody className="flex flex-col items-center justify-center py-16 border-2 border-dashed border-slate-700 rounded-xl m-6 bg-slate-900/30">
+            <CardBody className="flex flex-col items-center justify-center py-16 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl m-6 bg-white/30 dark:bg-slate-900/30">
               <UploadCloud size={48} className="text-slate-500 mb-4" />
-              <h3 className="text-lg font-medium text-white mb-1">Upload Resume (PDF)</h3>
-              <p className="text-slate-400 text-sm mb-6">Drag and drop or click to browse</p>
+              <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-1">Upload Resume (PDF)</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm mb-6">Drag and drop or click to browse</p>
               
               <input 
                 type="file" 
@@ -143,7 +143,7 @@ const ResumeAnalyzer = () => {
                 onChange={handleFileChange}
               />
               <label htmlFor="resume-upload">
-                <span className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium rounded-lg transition-colors cursor-pointer bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 shadow-lg">
+                <span className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium rounded-lg transition-colors cursor-pointer bg-slate-50 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-700 shadow-lg">
                   Select File
                 </span>
               </label>
@@ -156,11 +156,11 @@ const ResumeAnalyzer = () => {
               )}
 
               <div className="mt-6 w-full max-w-sm">
-                <label className="block text-sm font-medium text-slate-300 mb-2">
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                   Target Job Description (Optional)
                 </label>
                 <textarea
-                  className="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors resize-none h-24 custom-scrollbar"
+                  className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-3 text-sm text-slate-800 dark:text-slate-200 placeholder-slate-500 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-colors resize-none h-24 custom-scrollbar"
                   placeholder="Paste the JD here to get a specific match score..."
                   value={jobDescription}
                   onChange={(e) => setJobDescription(e.target.value)}
@@ -189,9 +189,9 @@ const ResumeAnalyzer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-in fade-in duration-500">
           
           {/* LEFT COLUMN: The Highlighted Resume Text */}
-          <Card className="h-[800px] flex flex-col border-slate-700 shadow-2xl">
-            <CardHeader className="border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
-              <h3 className="text-lg font-semibold text-slate-200 flex items-center gap-2">
+          <Card className="h-[800px] flex flex-col border-slate-200 dark:border-slate-700 shadow-2xl">
+            <CardHeader className="border-b border-slate-200 dark:border-slate-800 flex justify-between items-center bg-white/50 dark:bg-slate-900/50">
+              <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
                 <FileText size={20} className="text-primary-500" />
                 Parsed Resume
               </h3>
@@ -206,7 +206,7 @@ const ResumeAnalyzer = () => {
                 </Button>
               </div>
             </CardHeader>
-            <CardBody className="overflow-y-auto p-6 custom-scrollbar bg-slate-950">
+            <CardBody className="overflow-y-auto p-6 custom-scrollbar bg-slate-50 dark:bg-slate-950">
               <HighlightedText 
                 text={result.resumeText} 
                 mistakes={result.parsedData?.mistakes} 
@@ -219,7 +219,7 @@ const ResumeAnalyzer = () => {
           {/* RIGHT COLUMN: The Feedback & Scores */}
           <div className="space-y-6 h-[800px] overflow-y-auto custom-scrollbar pr-2">
             
-            <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700">
+            <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border-slate-200 dark:border-slate-700">
               <CardBody className={`grid gap-6 p-8 ${result.jdMatchScore ? 'grid-cols-2' : 'flex items-center'}`}>
                 <div className="flex items-center gap-6 flex-1">
                   <div className="relative w-28 h-28 flex items-center justify-center shrink-0">
@@ -233,18 +233,18 @@ const ResumeAnalyzer = () => {
                         style={{ transition: 'stroke-dashoffset 1s ease-in-out' }}
                       />
                     </svg>
-                    <span className="absolute text-3xl font-black text-white">{result.score}</span>
+                    <span className="absolute text-3xl font-black text-slate-900 dark:text-white">{result.score}</span>
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-white mb-1">Overall ATS</h2>
-                    <p className="text-slate-400 text-sm leading-relaxed">
+                    <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-1">Overall ATS</h2>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                       {result.score > 75 ? "Highly optimized!" : "Needs improvements."}
                     </p>
                   </div>
                 </div>
 
                 {result.jdMatchScore && (
-                  <div className="flex items-center gap-6 flex-1 border-l border-slate-700 pl-6">
+                  <div className="flex items-center gap-6 flex-1 border-l border-slate-200 dark:border-slate-700 pl-6">
                     <div className="relative w-28 h-28 flex items-center justify-center shrink-0">
                       <svg className="w-full h-full transform -rotate-90">
                         <circle cx="56" cy="56" r="48" stroke="currentColor" strokeWidth="10" fill="transparent" className="text-slate-800" />
@@ -256,11 +256,11 @@ const ResumeAnalyzer = () => {
                           style={{ transition: 'stroke-dashoffset 1s ease-in-out' }}
                         />
                       </svg>
-                      <span className="absolute text-3xl font-black text-white">{result.jdMatchScore}</span>
+                      <span className="absolute text-3xl font-black text-slate-900 dark:text-white">{result.jdMatchScore}</span>
                     </div>
                     <div>
-                      <h2 className="text-xl font-bold text-white mb-1">JD Match</h2>
-                      <p className="text-slate-400 text-sm leading-relaxed">
+                      <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-1">JD Match</h2>
+                      <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                         {result.jdMatchScore > 75 ? "Strong fit for this role!" : "Missing key requirements."}
                       </p>
                     </div>
@@ -282,7 +282,7 @@ const ResumeAnalyzer = () => {
                     {result.jdFeedback.map((item, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <div className="w-2 h-2 rounded-full bg-amber-500 mt-2 shrink-0"></div>
-                        <span className="text-slate-300 text-sm leading-relaxed">{item}</span>
+                        <span className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -297,7 +297,7 @@ const ResumeAnalyzer = () => {
                     <AlertTriangle size={20} />
                     Critical Mistakes Found
                   </h3>
-                  <p className="text-xs text-slate-400 mt-1">Click a mistake below to highlight it in your resume on the left.</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">Click a mistake below to highlight it in your resume on the left.</p>
                 </CardHeader>
                 <CardBody className="p-0">
                   <div className="divide-y divide-slate-800/50">
@@ -305,15 +305,15 @@ const ResumeAnalyzer = () => {
                       <div 
                         key={idx} 
                         onClick={() => setActiveMistake(mistake)}
-                        className={`p-5 cursor-pointer transition-colors ${activeMistake === mistake ? 'bg-slate-800/80 border-l-4 border-l-red-500' : 'hover:bg-slate-800/40 border-l-4 border-l-transparent'}`}
+                        className={`p-5 cursor-pointer transition-colors ${activeMistake === mistake ? 'bg-slate-50/80 dark:bg-slate-800/80 border-l-4 border-l-red-500' : 'hover:bg-slate-50/40 dark:bg-slate-800/40 border-l-4 border-l-transparent'}`}
                       >
                         <div className="flex items-start gap-3 mb-3">
                           <span className="w-6 h-6 rounded-full bg-red-900/50 text-red-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
                             {idx + 1}
                           </span>
                           <div>
-                            <h4 className="font-semibold text-white text-sm">{mistake.issue}</h4>
-                            <p className="text-slate-400 text-xs mt-1 font-mono italic bg-slate-900 p-2 rounded border border-slate-800 line-clamp-2">"{mistake.quote}"</p>
+                            <h4 className="font-semibold text-slate-900 dark:text-white text-sm">{mistake.issue}</h4>
+                            <p className="text-slate-600 dark:text-slate-400 text-xs mt-1 font-mono italic bg-white dark:bg-slate-900 p-2 rounded border border-slate-200 dark:border-slate-800 line-clamp-2">"{mistake.quote}"</p>
                           </div>
                         </div>
                         <div className="ml-9 bg-emerald-900/20 border border-emerald-900/30 p-3 rounded-lg">
@@ -329,14 +329,14 @@ const ResumeAnalyzer = () => {
 
             <Card>
               <CardHeader>
-                <h3 className="text-lg font-semibold text-slate-200">General Feedback</h3>
+                <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200">General Feedback</h3>
               </CardHeader>
               <CardBody>
                 <ul className="space-y-4">
                   {result.feedback.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <CheckCircle size={20} className="text-primary-500 mt-0.5 shrink-0" />
-                      <span className="text-slate-300 text-sm leading-relaxed">{item}</span>
+                      <span className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -347,20 +347,20 @@ const ResumeAnalyzer = () => {
               <Card className="border-primary-900/30">
                 <CardHeader className="flex flex-row items-center gap-2 bg-primary-900/10 border-b border-primary-900/20">
                   <Lightbulb size={24} className="text-amber-500" />
-                  <h3 className="text-lg font-semibold text-slate-200">Career Recommendation</h3>
+                  <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200">Career Recommendation</h3>
                 </CardHeader>
                 <CardBody className="p-6">
                   <div className="mb-6">
-                    <p className="text-lg font-medium text-white mb-2">
+                    <p className="text-lg font-medium text-slate-900 dark:text-white mb-2">
                       Recommended Path: <span className="text-primary-400 font-bold">{result.parsedData.recommendation.roleType}</span>
                     </p>
-                    <p className="text-slate-400 text-sm leading-relaxed">{result.parsedData.recommendation.reasoning}</p>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{result.parsedData.recommendation.reasoning}</p>
                   </div>
                   
-                  <h4 className="font-medium text-slate-200 mb-3 text-sm uppercase tracking-wider">Quick Search Links</h4>
+                  <h4 className="font-medium text-slate-800 dark:text-slate-200 mb-3 text-sm uppercase tracking-wider">Quick Search Links</h4>
                   <div className="flex flex-wrap gap-4">
                     {result.parsedData.recommendation.searchKeywords?.map((keyword, idx) => (
-                      <div key={idx} className="flex flex-col gap-2 bg-slate-900/50 p-3 rounded-lg border border-slate-700/50 flex-1 min-w-[200px]">
+                      <div key={idx} className="flex flex-col gap-2 bg-white/50 dark:bg-slate-900/50 p-3 rounded-lg border border-slate-200/50 dark:border-slate-700/50 flex-1 min-w-[200px]">
                         <span className="text-primary-300 font-medium text-sm">
                           {keyword}
                         </span>

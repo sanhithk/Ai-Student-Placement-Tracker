@@ -74,7 +74,7 @@ const DailyChallenge = () => {
               <CheckCircle2 size={24} />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white">Daily Challenge Completed!</h3>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white">Daily Challenge Completed!</h3>
               <p className="text-emerald-400 text-sm mt-1">Come back tomorrow for a new challenge.</p>
             </div>
           </div>
@@ -107,7 +107,7 @@ const DailyChallenge = () => {
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ type: "spring", delay: 0.2 }}
-                className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center text-white shadow-[0_0_30px_rgba(245,158,11,0.5)]"
+                className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center text-slate-900 dark:text-white shadow-[0_0_30px_rgba(245,158,11,0.5)]"
               >
                 <CheckCircle2 size={32} />
               </motion.div>
@@ -131,12 +131,12 @@ const DailyChallenge = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 }}
-                className="flex items-center gap-3 bg-slate-900/50 p-3 rounded-xl border border-slate-700"
+                className="flex items-center gap-3 bg-white/50 dark:bg-slate-900/50 p-3 rounded-xl border border-slate-200 dark:border-slate-700"
               >
                 <Award className="text-purple-400" size={24} />
                 <div>
-                  <p className="text-xs text-slate-400 uppercase font-bold tracking-wider">New Badge</p>
-                  <p className="text-white font-medium capitalize">{completedState.newBadges[0].replace(/_/g, ' ')}</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 uppercase font-bold tracking-wider">New Badge</p>
+                  <p className="text-slate-900 dark:text-white font-medium capitalize">{completedState.newBadges[0].replace(/_/g, ' ')}</p>
                 </div>
               </motion.div>
             )}
@@ -167,8 +167,8 @@ const DailyChallenge = () => {
                 <Zap size={12} className="mr-1" /> {chal.points} XP
               </span>
             </div>
-            <h3 className="text-xl font-bold text-white mb-1">{chal.title}</h3>
-            <p className="text-slate-400 text-sm leading-relaxed max-w-2xl">{chal.description}</p>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">{chal.title}</h3>
+            <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed max-w-2xl">{chal.description}</p>
           </div>
         </div>
 
@@ -178,7 +178,7 @@ const DailyChallenge = () => {
               <button 
                 key={i} 
                 onClick={() => { setSelectedOption(opt); setError(''); }}
-                className={`w-full text-left px-4 py-3 rounded-xl border transition-all ${selectedOption === opt ? 'bg-primary-500/20 border-primary-500 text-primary-300' : 'bg-slate-800/50 border-slate-700 text-slate-300 hover:bg-slate-800 hover:border-slate-600'}`}
+                className={`w-full text-left px-4 py-3 rounded-xl border transition-all ${selectedOption === opt ? 'bg-primary-500/20 border-primary-500 text-primary-300' : 'bg-slate-50/50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-800 hover:border-slate-600'}`}
               >
                 {opt}
               </button>
@@ -193,7 +193,7 @@ const DailyChallenge = () => {
             whileTap={{ scale: 0.95 }}
             onClick={handleComplete}
             disabled={completing}
-            className="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-500 hover:to-indigo-500 text-white font-bold shadow-lg shadow-primary-500/25 flex items-center justify-center gap-2 transition-all disabled:opacity-70"
+            className="w-full md:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-primary-600 to-indigo-600 hover:from-primary-500 hover:to-indigo-500 text-slate-900 dark:text-white font-bold shadow-lg shadow-primary-500/25 flex items-center justify-center gap-2 transition-all disabled:opacity-70"
           >
             {completing ? 'Checking...' : 'Submit Answer'} <CheckCircle2 size={18} />
           </motion.button>

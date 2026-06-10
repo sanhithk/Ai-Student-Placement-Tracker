@@ -19,14 +19,14 @@ const StatCard = ({ title, value, icon: Icon, colorClass }) => (
     whileHover={{ scale: 1.03, y: -4 }}
     className="h-full"
   >
-    <Card className="h-full border border-slate-700/30 bg-slate-800/60 backdrop-blur-xl shadow-lg transition-shadow hover:shadow-[0_8px_30px_rgba(99,102,241,0.15)]">
+    <Card className="h-full border border-slate-200/30 dark:border-slate-700/30 bg-slate-50/60 dark:bg-slate-800/60 backdrop-blur-xl shadow-lg transition-shadow hover:shadow-[0_8px_30px_rgba(99,102,241,0.15)]">
       <CardBody className="flex items-center gap-5 p-6">
         <div className={`p-4 rounded-xl ${colorClass}`}>
           <Icon size={28} />
         </div>
         <div>
-          <p className="text-sm font-semibold tracking-wider text-slate-400 uppercase mb-1">{title}</p>
-          <h3 className="text-3xl font-black text-white">{value}</h3>
+          <p className="text-sm font-semibold tracking-wider text-slate-600 dark:text-slate-400 uppercase mb-1">{title}</p>
+          <h3 className="text-3xl font-black text-slate-900 dark:text-white">{value}</h3>
         </div>
       </CardBody>
     </Card>
@@ -180,7 +180,7 @@ const Dashboard = () => {
   }, []);
 
   if (loading) {
-    return <div className="flex items-center justify-center h-64 text-slate-400">Loading your real-time dashboard...</div>;
+    return <div className="flex items-center justify-center h-64 text-slate-600 dark:text-slate-400">Loading your real-time dashboard...</div>;
   }
 
   const containerVariants = {
@@ -205,7 +205,7 @@ const Dashboard = () => {
         <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-primary-400">
           Welcome back, {user?.name || 'Student'}!
         </h1>
-        <p className="text-slate-400 mt-2 text-lg">Here is your live career progression overview.</p>
+        <p className="text-slate-600 dark:text-slate-400 mt-2 text-lg">Here is your live career progression overview.</p>
       </motion.div>
 
       <motion.div variants={itemVariants}>
@@ -234,7 +234,7 @@ const Dashboard = () => {
       >
         <Card className="lg:col-span-2">
           <CardHeader>
-            <h2 className="text-lg font-semibold text-slate-200 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
               <Sparkles className="text-primary-500" size={20} />
               AI Career Insights
             </h2>
@@ -261,7 +261,7 @@ const Dashboard = () => {
 
         <Card>
           <CardHeader>
-            <h2 className="text-lg font-semibold text-slate-200">Profile Strength</h2>
+            <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200">Profile Strength</h2>
           </CardHeader>
           <CardBody className="flex flex-col items-center justify-center py-6">
             <div className="relative w-32 h-32 flex items-center justify-center mb-6">
@@ -280,10 +280,10 @@ const Dashboard = () => {
                   transition={{ duration: 1.5, ease: "easeOut" }}
                 />
               </svg>
-              <div className="absolute text-3xl font-black text-white">{stats.profileStrength}%</div>
+              <div className="absolute text-3xl font-black text-slate-900 dark:text-white">{stats.profileStrength}%</div>
             </div>
             
-            <div className="w-full space-y-2 text-sm text-slate-400">
+            <div className="w-full space-y-2 text-sm text-slate-600 dark:text-slate-400">
               <div className="flex justify-between items-center">
                 <span>Account Created</span>
                 <span className="text-emerald-400"><Award size={16}/></span>
@@ -315,7 +315,7 @@ const Dashboard = () => {
       >
         <Card>
           <CardHeader>
-            <h2 className="text-lg font-semibold text-slate-200">Application Status</h2>
+            <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200">Application Status</h2>
           </CardHeader>
           <CardBody className="h-80">
             <ResponsiveContainer width="100%" height="100%">
@@ -332,7 +332,7 @@ const Dashboard = () => {
 
         <Card>
           <CardHeader>
-            <h2 className="text-lg font-semibold text-slate-200">Recent Activities</h2>
+            <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200">Recent Activities</h2>
           </CardHeader>
           <CardBody>
             <div className="space-y-4">
@@ -340,8 +340,8 @@ const Dashboard = () => {
                 <div key={i} className="flex items-start gap-3">
                   <div className="w-2 h-2 mt-2 rounded-full bg-primary-500 shrink-0" />
                   <div>
-                    <p className="text-slate-200 font-medium">{act.text}</p>
-                    <p className="text-sm text-slate-400">{act.time}</p>
+                    <p className="text-slate-800 dark:text-slate-200 font-medium">{act.text}</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">{act.time}</p>
                   </div>
                 </div>
               ))}

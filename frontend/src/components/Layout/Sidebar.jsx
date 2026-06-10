@@ -1,12 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, FileText, Briefcase, Code, Compass, Video, Settings, LogOut, Sparkles, Zap, X, Trophy, Target, Building2 } from 'lucide-react';
+import { LayoutDashboard, FileText, Briefcase, Code, Compass, Video, Settings, LogOut, Sparkles, Zap, X, Trophy, Target, Building2, Sun, Moon } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import { motion } from 'framer-motion';
 
 
 const Sidebar = ({ onClose }) => {
   const { logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navItems = [
     { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
     { name: 'Placement Readiness', path: '/readiness', icon: <Target size={20} className="text-emerald-400" /> },
@@ -23,9 +25,9 @@ const Sidebar = ({ onClose }) => {
 
 
   return (
-    <aside className="w-72 md:w-64 bg-slate-900 md:bg-slate-900/50 backdrop-blur-xl border-r border-slate-800 h-screen sticky top-0 flex flex-col shadow-2xl md:shadow-none">
+    <aside className="w-72 md:w-64 bg-white dark:bg-slate-900 md:bg-white/80 md:dark:bg-slate-900/50 backdrop-blur-xl border-r border-slate-200 dark:border-slate-800 h-screen sticky top-0 flex flex-col shadow-2xl md:shadow-none transition-colors duration-300">
       <div className="p-6 flex justify-between items-center">
-        <h1 className="text-xl font-bold text-white flex items-center gap-2">
+        <h1 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
           <motion.div
             animate={{ rotate: [0, 15, -15, 0] }}
             transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
@@ -34,7 +36,7 @@ const Sidebar = ({ onClose }) => {
           </motion.div>
           Placement AI
         </h1>
-        <button onClick={onClose} className="md:hidden text-slate-400 hover:text-white p-2">
+        <button onClick={onClose} className="md:hidden text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white p-2">
           <X size={24} />
         </button>
       </div>
@@ -48,8 +50,8 @@ const Sidebar = ({ onClose }) => {
             className={({ isActive }) =>
               `flex items-center gap-4 px-4 py-3 rounded-xl text-base md:text-sm font-medium transition-colors ${
                 isActive 
-                  ? 'bg-primary-500/15 text-primary-400 shadow-[inset_0_0_20px_rgba(99,102,241,0.05)]' 
-                  : 'text-slate-400 hover:bg-slate-800/80 hover:text-slate-200'
+                  ? 'bg-primary-50 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400 shadow-[inset_0_0_20px_rgba(99,102,241,0.05)]' 
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/80 dark:hover:text-slate-200'
               }`
             }
           >
@@ -65,16 +67,23 @@ const Sidebar = ({ onClose }) => {
         ))}
       </nav>
 
-      <div className="p-4 border-t border-slate-800">
+      <div className="p-4 border-t border-slate-200 dark:border-slate-800 transition-colors duration-300">
         <div className="space-y-2">
+          <button onClick={toggleTheme} className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-base md:text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/80 dark:hover:text-slate-200 transition-colors">
+            <motion.div whileHover={{ scale: 1.2, rotate: 180 }} transition={{ type: "spring", stiffness: 400 }}>
+              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+            </motion.div>
+            {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
+          </button>
+          
           <NavLink
             to="/settings"
             onClick={onClose}
             className={({ isActive }) =>
               `flex items-center gap-4 px-4 py-3 rounded-xl text-base md:text-sm font-medium transition-colors ${
                 isActive 
-                  ? 'bg-primary-500/15 text-primary-400 shadow-[inset_0_0_20px_rgba(99,102,241,0.05)]' 
-                  : 'text-slate-400 hover:bg-slate-800/80 hover:text-slate-200'
+                  ? 'bg-primary-50 text-primary-600 dark:bg-primary-500/15 dark:text-primary-400 shadow-[inset_0_0_20px_rgba(99,102,241,0.05)]' 
+                  : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/80 dark:hover:text-slate-200'
               }`
             }
           >
@@ -83,7 +92,7 @@ const Sidebar = ({ onClose }) => {
             </motion.div>
             Settings
           </NavLink>
-          <button onClick={() => { logout(); onClose?.(); }} className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-base md:text-sm font-medium text-slate-400 hover:bg-red-500/10 hover:text-red-500 transition-colors">
+          <button onClick={() => { logout(); onClose?.(); }} className="w-full flex items-center gap-4 px-4 py-3 rounded-xl text-base md:text-sm font-medium text-slate-600 hover:bg-red-50 hover:text-red-600 dark:text-slate-400 dark:hover:bg-red-500/10 dark:hover:text-red-500 transition-colors">
             <motion.div whileHover={{ scale: 1.2, x: 5 }} transition={{ type: "spring", stiffness: 400 }}>
               <LogOut size={20} />
             </motion.div>

@@ -28,7 +28,7 @@ const CodingStats = () => {
   }, []);
 
   if (loading) {
-    return <div className="flex items-center justify-center h-64 text-slate-400">Loading your live coding stats...</div>;
+    return <div className="flex items-center justify-center h-64 text-slate-600 dark:text-slate-400">Loading your live coding stats...</div>;
   }
 
   if (error) {
@@ -40,11 +40,11 @@ const CodingStats = () => {
       <Card className="max-w-2xl mx-auto mt-10">
         <CardBody className="flex flex-col items-center justify-center py-12 text-center">
           <Code size={48} className="text-slate-500 mb-4" />
-          <h2 className="text-xl font-bold text-slate-200 mb-2">No Coding Profiles Linked</h2>
-          <p className="text-slate-400 mb-6">
+          <h2 className="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">No Coding Profiles Linked</h2>
+          <p className="text-slate-600 dark:text-slate-400 mb-6">
             Link your LeetCode or Codeforces accounts in settings to track your problem-solving progress directly on your dashboard.
           </p>
-          <Link to="/settings" className="px-4 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 transition-colors">
+          <Link to="/settings" className="px-4 py-2 bg-primary-600 text-slate-900 dark:text-white rounded-lg font-medium hover:bg-primary-700 transition-colors">
             Go to Settings
           </Link>
         </CardBody>
@@ -55,25 +55,25 @@ const CodingStats = () => {
   return (
     <div className="space-y-10">
       <div>
-        <h1 className="text-3xl font-bold text-white flex items-center gap-2">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
           <Code size={32} className="text-primary-500" />
           Coding Statistics
         </h1>
-        <p className="text-slate-400 mt-1">Live data from your linked programming profiles</p>
+        <p className="text-slate-600 dark:text-slate-400 mt-1">Live data from your linked programming profiles</p>
       </div>
 
       {data.leetcode && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
+            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white flex items-center gap-2">
               <span className="text-amber-500">LeetCode</span>
-              <span className="text-sm font-normal text-slate-400">({data.leetcode.username})</span>
+              <span className="text-sm font-normal text-slate-600 dark:text-slate-400">({data.leetcode.username})</span>
             </h2>
             <a 
               href={`https://leetcode.com/${data.leetcode.username}/`}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-slate-800 text-slate-300 rounded-lg hover:bg-slate-700 font-medium transition-colors text-sm"
+              className="flex items-center gap-2 px-4 py-2 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-700 font-medium transition-colors text-sm"
             >
               View Profile <ExternalLink size={16} />
             </a>
@@ -86,8 +86,8 @@ const CodingStats = () => {
                   <Trophy size={24} />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-400">Total Solved</p>
-                  <h3 className="text-2xl font-bold text-white">{data.leetcode.totalSolved || 0}</h3>
+                  <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Total Solved</p>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{data.leetcode.totalSolved || 0}</h3>
                 </div>
               </CardBody>
             </Card>
@@ -97,8 +97,8 @@ const CodingStats = () => {
                   <Target size={24} />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-400">Easy</p>
-                  <h3 className="text-2xl font-bold text-white">{data.leetcode.easySolved || 0}</h3>
+                  <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Easy</p>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{data.leetcode.easySolved || 0}</h3>
                 </div>
               </CardBody>
             </Card>
@@ -108,8 +108,8 @@ const CodingStats = () => {
                   <AlertCircle size={24} />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-400">Medium</p>
-                  <h3 className="text-2xl font-bold text-white">{data.leetcode.mediumSolved || 0}</h3>
+                  <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Medium</p>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{data.leetcode.mediumSolved || 0}</h3>
                 </div>
               </CardBody>
             </Card>
@@ -119,8 +119,8 @@ const CodingStats = () => {
                   <AlertCircle size={24} />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-400">Hard</p>
-                  <h3 className="text-2xl font-bold text-white">{data.leetcode.hardSolved || 0}</h3>
+                  <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Hard</p>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{data.leetcode.hardSolved || 0}</h3>
                 </div>
               </CardBody>
             </Card>
@@ -131,15 +131,15 @@ const CodingStats = () => {
       {data.codeforces && (
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold text-white flex items-center gap-2">
+            <h2 className="text-2xl font-semibold text-slate-900 dark:text-white flex items-center gap-2">
               <span className="text-blue-500">Codeforces</span>
-              <span className="text-sm font-normal text-slate-400">({data.codeforces.username})</span>
+              <span className="text-sm font-normal text-slate-600 dark:text-slate-400">({data.codeforces.username})</span>
             </h2>
             <a 
               href={`https://codeforces.com/profile/${data.codeforces.username}`}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-slate-800 text-slate-300 rounded-lg hover:bg-slate-700 font-medium transition-colors text-sm"
+              className="flex items-center gap-2 px-4 py-2 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-700 font-medium transition-colors text-sm"
             >
               View Profile <ExternalLink size={16} />
             </a>
@@ -152,8 +152,8 @@ const CodingStats = () => {
                   <Code size={24} />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-400">Total Solved</p>
-                  <h3 className="text-2xl font-bold text-white">{data.codeforces.totalSolved || 0}</h3>
+                  <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Total Solved</p>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{data.codeforces.totalSolved || 0}</h3>
                 </div>
               </CardBody>
             </Card>
@@ -163,8 +163,8 @@ const CodingStats = () => {
                   <Activity size={24} />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-400">Current Rating</p>
-                  <h3 className="text-2xl font-bold text-white">{data.codeforces.rating || 'Unrated'}</h3>
+                  <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Current Rating</p>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{data.codeforces.rating || 'Unrated'}</h3>
                 </div>
               </CardBody>
             </Card>
@@ -174,8 +174,8 @@ const CodingStats = () => {
                   <Trophy size={24} />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-400">Max Rating</p>
-                  <h3 className="text-2xl font-bold text-white">{data.codeforces.maxRating || 'N/A'}</h3>
+                  <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Max Rating</p>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{data.codeforces.maxRating || 'N/A'}</h3>
                 </div>
               </CardBody>
             </Card>
@@ -185,8 +185,8 @@ const CodingStats = () => {
                   <Target size={24} />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-slate-400">Rank</p>
-                  <h3 className="text-2xl font-bold text-white capitalize">{data.codeforces.rank || 'N/A'}</h3>
+                  <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Rank</p>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white capitalize">{data.codeforces.rank || 'N/A'}</h3>
                 </div>
               </CardBody>
             </Card>

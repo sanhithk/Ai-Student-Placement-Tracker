@@ -224,11 +224,11 @@ const MockInterview = () => {
     return (
       <div className="max-w-3xl mx-auto space-y-6">
         <div>
-          <h1 className="text-3xl font-bold text-white flex items-center gap-2">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <Video size={32} className="text-primary-500" />
             AI Mock Interview
           </h1>
-          <p className="text-slate-400 mt-1">Practice highly realistic, voice-enabled interviews with our AI.</p>
+          <p className="text-slate-600 dark:text-slate-400 mt-1">Practice highly realistic, voice-enabled interviews with our AI.</p>
         </div>
 
         <Card>
@@ -246,11 +246,11 @@ const MockInterview = () => {
 
             <div className="space-y-6 max-w-md mx-auto">
               <div className="space-y-2">
-                <label className="block text-sm font-medium text-slate-300">Select Interview Topic</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Select Interview Topic</label>
                 <select 
                   value={topic} 
                   onChange={(e) => setTopic(e.target.value)}
-                  className="w-full px-4 py-2 bg-slate-900/50 text-white border border-slate-700 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-shadow"
+                  className="w-full px-4 py-2 bg-white/50 dark:bg-slate-900/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-shadow"
                 >
                   <option value="Data Structures & Algorithms (DSA)">Data Structures & Algorithms (DSA)</option>
                   <option value="Resume Explanation">Resume Explanation</option>
@@ -285,7 +285,7 @@ const MockInterview = () => {
   if (evaluation) {
     return (
       <div className="max-w-3xl mx-auto space-y-6">
-        <h1 className="text-3xl font-bold text-white mb-6">Interview Evaluation</h1>
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-6">Interview Evaluation</h1>
         <Card>
           <CardBody className="space-y-6">
             <div className="flex items-center gap-6">
@@ -299,11 +299,11 @@ const MockInterview = () => {
                     className={evaluation.score > 75 ? "text-emerald-500" : "text-amber-500"} 
                   />
                 </svg>
-                <span className="absolute text-2xl font-bold text-white">{evaluation.score}</span>
+                <span className="absolute text-2xl font-bold text-slate-900 dark:text-white">{evaluation.score}</span>
               </div>
               <div>
-                <h2 className="text-xl font-bold text-white">Performance Score</h2>
-                <p className="text-slate-400 mt-1">{evaluation.feedback}</p>
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white">Performance Score</h2>
+                <p className="text-slate-600 dark:text-slate-400 mt-1">{evaluation.feedback}</p>
               </div>
             </div>
 
@@ -314,7 +314,7 @@ const MockInterview = () => {
                 </h3>
                 <ul className="space-y-2">
                   {evaluation.strengths?.map((item, idx) => (
-                    <li key={idx} className="text-sm text-slate-300 flex items-start gap-2">
+                    <li key={idx} className="text-sm text-slate-700 dark:text-slate-300 flex items-start gap-2">
                       <span className="text-emerald-500 mt-0.5">•</span> {item}
                     </li>
                   ))}
@@ -326,7 +326,7 @@ const MockInterview = () => {
                 </h3>
                 <ul className="space-y-2">
                   {evaluation.improvements?.map((item, idx) => (
-                    <li key={idx} className="text-sm text-slate-300 flex items-start gap-2">
+                    <li key={idx} className="text-sm text-slate-700 dark:text-slate-300 flex items-start gap-2">
                       <span className="text-amber-500 mt-0.5">•</span> {item}
                     </li>
                   ))}
@@ -347,14 +347,14 @@ const MockInterview = () => {
   return (
     <div className="h-[calc(100vh-6rem)] flex flex-col max-w-6xl mx-auto space-y-4">
       {/* Top Bar */}
-      <div className="flex justify-between items-center bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+      <div className="flex justify-between items-center bg-white/50 dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
         <div>
-          <h2 className="text-lg font-bold text-white flex items-center gap-2">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <span className={`w-3 h-3 rounded-full ${isAiSpeaking ? 'bg-primary-500 animate-pulse' : 'bg-red-500 animate-pulse'}`}></span>
             {topic === 'Custom' ? customTopic : topic}
           </h2>
         </div>
-        <div className={`text-2xl font-mono font-bold tracking-wider ${timeLeft < 60 ? 'text-red-400 animate-pulse' : 'text-white'}`}>
+        <div className={`text-2xl font-mono font-bold tracking-wider ${timeLeft < 60 ? 'text-red-400 animate-pulse' : 'text-slate-900 dark:text-white'}`}>
           {formatTime(timeLeft)}
         </div>
       </div>
@@ -363,13 +363,13 @@ const MockInterview = () => {
       <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 overflow-hidden">
         
         {/* Left: AI Interviewer */}
-        <Card className="flex flex-col h-full overflow-hidden bg-slate-900/80 border-slate-700 relative">
+        <Card className="flex flex-col h-full overflow-hidden bg-white/80 dark:bg-slate-900/80 border-slate-200 dark:border-slate-700 relative">
           <CardBody className="flex flex-col items-center justify-center p-8 text-center relative z-10 h-full">
             
             {/* AI Avatar */}
             <div className={`relative mb-8 transition-transform duration-500 ${isAiSpeaking ? 'scale-110' : 'scale-100'}`}>
               <div className={`absolute inset-0 rounded-full blur-xl ${isAiSpeaking ? 'bg-primary-500/50 animate-pulse' : 'bg-primary-900/20'}`}></div>
-              <div className="relative w-32 h-32 bg-slate-800 rounded-full flex items-center justify-center border-4 border-slate-700 shadow-2xl">
+              <div className="relative w-32 h-32 bg-slate-50 dark:bg-slate-800 rounded-full flex items-center justify-center border-4 border-slate-200 dark:border-slate-700 shadow-2xl">
                 <Bot size={64} className={isAiSpeaking ? 'text-primary-400' : 'text-slate-500'} />
               </div>
             </div>
@@ -383,7 +383,7 @@ const MockInterview = () => {
                   <span className="w-3 h-3 bg-primary-500 rounded-full animate-bounce" style={{animationDelay: '0.4s'}}></span>
                 </div>
               ) : (
-                <p className="text-xl md:text-2xl font-medium text-white leading-relaxed">
+                <p className="text-xl md:text-2xl font-medium text-slate-900 dark:text-white leading-relaxed">
                   {currentAiMessage}
                 </p>
               )}
@@ -392,7 +392,7 @@ const MockInterview = () => {
         </Card>
 
         {/* Right: User Camera & Subtitles */}
-        <Card className="flex flex-col h-full overflow-hidden bg-black border-slate-700 relative">
+        <Card className="flex flex-col h-full overflow-hidden bg-black border-slate-200 dark:border-slate-700 relative">
           <video 
             ref={videoRef} 
             autoPlay 
@@ -404,11 +404,11 @@ const MockInterview = () => {
           {/* User Subtitles Overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
             {transcript ? (
-              <p className="text-lg text-white font-medium drop-shadow-md">
+              <p className="text-lg text-slate-900 dark:text-white font-medium drop-shadow-md">
                 "{transcript}"
               </p>
             ) : (
-              <p className="text-slate-400/50 italic text-sm">
+              <p className="text-slate-600 dark:text-slate-400/50 italic text-sm">
                 {isRecording ? "Listening..." : "Click the microphone to start speaking"}
               </p>
             )}
@@ -417,28 +417,28 @@ const MockInterview = () => {
       </div>
 
       {/* Bottom Control Bar */}
-      <div className="flex justify-center items-center gap-6 p-4 bg-slate-900/80 rounded-2xl border border-slate-800 shadow-xl">
+      <div className="flex justify-center items-center gap-6 p-4 bg-white/80 dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xl">
         <button 
           onClick={toggleRecording}
           disabled={isAiSpeaking || isLoading}
           className={`flex flex-col items-center justify-center w-20 h-20 rounded-full transition-all ${
             isAiSpeaking || isLoading 
-              ? 'bg-slate-800 text-slate-500 cursor-not-allowed opacity-50'
+              ? 'bg-slate-50 dark:bg-slate-800 text-slate-500 cursor-not-allowed opacity-50'
               : isRecording 
                 ? 'bg-red-500/20 text-red-500 hover:bg-red-500/30 ring-4 ring-red-500/50' 
-                : 'bg-primary-600 text-white hover:bg-primary-500 hover:scale-105 shadow-lg shadow-primary-500/30'
+                : 'bg-primary-600 text-slate-900 dark:text-white hover:bg-primary-500 hover:scale-105 shadow-lg shadow-primary-500/30'
           }`}
         >
           {isRecording ? <Mic size={32} className="animate-pulse" /> : <Mic size={32} />}
         </button>
         
-        <div className="text-sm font-medium text-slate-400 w-32 text-center">
+        <div className="text-sm font-medium text-slate-600 dark:text-slate-400 w-32 text-center">
           {isAiSpeaking ? "Interviewer Speaking..." : isRecording ? "Click to Submit" : "Click to Speak"}
         </div>
 
         <button 
           onClick={handleEndInterview}
-          className="flex flex-col items-center justify-center w-16 h-16 rounded-full bg-red-900/30 text-red-400 hover:bg-red-500 hover:text-white transition-all ml-8"
+          className="flex flex-col items-center justify-center w-16 h-16 rounded-full bg-red-900/30 text-red-400 hover:bg-red-500 hover:text-slate-900 dark:text-white transition-all ml-8"
           title="End Interview"
         >
           <PhoneOff size={24} />

@@ -17,7 +17,7 @@ const JobTracker = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const statusColors = {
-    'Saved': 'bg-slate-700 text-slate-300',
+    'Saved': 'bg-slate-700 text-slate-700 dark:text-slate-300',
     'Applied': 'bg-blue-900/30 text-blue-400',
     'Interviewing': 'bg-amber-900/30 text-amber-400',
     'Rejected': 'bg-red-900/30 text-red-400',
@@ -77,23 +77,23 @@ const JobTracker = () => {
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center h-64 text-slate-400">Loading your applications...</div>;
+    return <div className="flex items-center justify-center h-64 text-slate-600 dark:text-slate-400">Loading your applications...</div>;
   }
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-end">
         <div>
-          <h1 className="text-3xl font-bold text-white">Job Tracker</h1>
-          <p className="text-slate-400 mt-1">Keep track of your internship and job applications.</p>
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white">Job Tracker</h1>
+          <p className="text-slate-600 dark:text-slate-400 mt-1">Keep track of your internship and job applications.</p>
         </div>
         <Button onClick={() => setShowModal(true)}>Add Application</Button>
       </div>
 
       <Card>
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-slate-300">
-            <thead className="bg-slate-800 text-white font-medium border-b border-slate-700">
+          <table className="w-full text-left text-sm text-slate-700 dark:text-slate-300">
+            <thead className="bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white font-medium border-b border-slate-200 dark:border-slate-700">
               <tr>
                 <th className="px-6 py-4">Company</th>
                 <th className="px-6 py-4">Role</th>
@@ -105,14 +105,14 @@ const JobTracker = () => {
             <tbody className="divide-y divide-slate-700/50">
               {jobs.length === 0 ? (
                 <tr>
-                  <td colSpan="5" className="px-6 py-8 text-center text-slate-400">
+                  <td colSpan="5" className="px-6 py-8 text-center text-slate-600 dark:text-slate-400">
                     No applications yet. Click "Add Application" to get started!
                   </td>
                 </tr>
               ) : (
                 jobs.map((job) => (
                   <tr key={job._id} className="hover:bg-slate-700/30 transition-colors">
-                    <td className="px-6 py-4 font-medium text-white">{job.company}</td>
+                    <td className="px-6 py-4 font-medium text-slate-900 dark:text-white">{job.company}</td>
                     <td className="px-6 py-4">{job.role}</td>
                     <td className="px-6 py-4">{new Date(job.createdAt).toLocaleDateString()}</td>
                     <td className="px-6 py-4">
@@ -138,12 +138,12 @@ const JobTracker = () => {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-slate-900/50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-white/50 dark:bg-slate-900/50 flex items-center justify-center p-4 z-50">
           <Card className="w-full max-w-md">
             <CardBody>
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-bold text-white">Add Application</h2>
-                <button onClick={() => setShowModal(false)} className="text-slate-400 hover:text-slate-200">
+                <h2 className="text-xl font-bold text-slate-900 dark:text-white">Add Application</h2>
+                <button onClick={() => setShowModal(false)} className="text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:text-slate-200">
                   <X size={24} />
                 </button>
               </div>
@@ -166,11 +166,11 @@ const JobTracker = () => {
                 />
 
                 <div className="space-y-1">
-                  <label className="block text-sm font-medium text-slate-300">Status</label>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Status</label>
                   <select 
                     value={status} 
                     onChange={(e) => setStatus(e.target.value)}
-                    className="w-full px-4 py-2 bg-slate-900/50 text-white border border-slate-700 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-shadow"
+                    className="w-full px-4 py-2 bg-white/50 dark:bg-slate-900/50 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-shadow"
                   >
                     <option value="Saved">Saved</option>
                     <option value="Applied">Applied</option>

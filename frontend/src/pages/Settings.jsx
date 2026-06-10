@@ -61,16 +61,16 @@ const Settings = () => {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       <div>
-        <h1 className="text-3xl font-bold text-white flex items-center gap-2">
+        <h1 className="text-3xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
           <SettingsIcon size={32} className="text-primary-500" />
           Settings
         </h1>
-        <p className="text-slate-400 mt-1">Manage your account preferences and linked profiles.</p>
+        <p className="text-slate-600 dark:text-slate-400 mt-1">Manage your account preferences and linked profiles.</p>
       </div>
 
       <Card>
         <CardHeader>
-          <h2 className="text-lg font-semibold text-slate-200 flex items-center gap-2">
+          <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
             <User size={20} className="text-primary-500" />
             Account Information
           </h2>
@@ -78,15 +78,15 @@ const Settings = () => {
         <CardBody>
           <div className="space-y-4">
             <div>
-              <p className="text-sm font-medium text-slate-400">Name</p>
-              <p className="text-base text-white font-medium">{user?.name}</p>
+              <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Name</p>
+              <p className="text-base text-slate-900 dark:text-white font-medium">{user?.name}</p>
             </div>
             <div>
-              <p className="text-sm font-medium text-slate-400">Email Address</p>
-              <p className="text-base text-white">{user?.email}</p>
+              <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Email Address</p>
+              <p className="text-base text-slate-900 dark:text-white">{user?.email}</p>
             </div>
             <div>
-              <p className="text-sm font-medium text-slate-400">Role</p>
+              <p className="text-sm font-medium text-slate-600 dark:text-slate-400">Role</p>
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-900/30 text-primary-400 capitalize mt-1">
                 {user?.role}
               </span>
@@ -97,11 +97,11 @@ const Settings = () => {
 
       <Card>
         <CardHeader>
-          <h2 className="text-lg font-semibold text-slate-200 flex items-center gap-2">
+          <h2 className="text-lg font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
             <Code size={20} className="text-emerald-500" />
             Linked Coding Platforms
           </h2>
-          <p className="text-sm text-slate-400 mt-1">Link your accounts to display real-time problem solving stats on your dashboard.</p>
+          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">Link your accounts to display real-time problem solving stats on your dashboard.</p>
         </CardHeader>
         <CardBody>
           <form onSubmit={handleSave} className="space-y-4 max-w-md">

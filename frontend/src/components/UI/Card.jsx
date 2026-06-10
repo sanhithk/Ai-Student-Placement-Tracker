@@ -6,7 +6,7 @@ const Card = ({ children, className = '' }) => {
     <motion.div 
       whileHover={{ y: -2, boxShadow: '0 10px 25px -5px rgba(99, 102, 241, 0.2), 0 8px 10px -6px rgba(99, 102, 241, 0.2)' }}
       transition={{ duration: 0.2 }}
-      className={`bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-700/50 shadow-xl overflow-hidden ${className}`}
+      className={`bg-white dark:bg-slate-50/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-slate-200/50 dark:border-slate-700/50 shadow-md dark:shadow-xl overflow-hidden transition-colors duration-300 ${className}`}
     >
       {children}
     </motion.div>
@@ -14,7 +14,7 @@ const Card = ({ children, className = '' }) => {
 };
 
 export const CardHeader = ({ children, className = '' }) => (
-  <div className={`px-6 py-4 border-b border-slate-700/50 ${className}`}>
+  <div className={`px-6 py-4 border-b border-slate-200 dark:border-slate-200/50 dark:border-slate-700/50 transition-colors duration-300 ${className}`}>
     {children}
   </div>
 );

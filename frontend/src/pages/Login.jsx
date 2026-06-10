@@ -94,10 +94,10 @@ const Login = () => {
           <div className="flex justify-center mb-4">
             <Compass size={48} className="text-primary-600" />
           </div>
-          <h2 className="text-3xl font-bold text-white">
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
             {isForgotPassword ? 'Reset Password' : 'Welcome back'}
           </h2>
-          <p className="mt-2 text-sm text-slate-400">
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
             {isForgotPassword ? 'Enter your email to receive a reset code' : 'Sign in to your account to continue'}
           </p>
         </div>
@@ -161,7 +161,7 @@ const Login = () => {
                       setError('');
                       setMessage('');
                     }}
-                    className="text-sm text-slate-400 hover:text-white"
+                    className="text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:text-white"
                   >
                     Back to Login
                   </button>
@@ -216,10 +216,10 @@ const Login = () => {
                 <div className="mt-6">
                   <div className="relative">
                     <div className="absolute inset-0 flex items-center">
-                      <div className="w-full border-t border-slate-700"></div>
+                      <div className="w-full border-t border-slate-200 dark:border-slate-700"></div>
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-2 bg-slate-800 text-slate-400">Or continue with</span>
+                      <span className="px-2 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Or continue with</span>
                     </div>
                   </div>
 
@@ -236,7 +236,7 @@ const Login = () => {
                 </div>
 
                 <div className="mt-6 text-center text-sm">
-                  <span className="text-slate-400">Don't have an account? </span>
+                  <span className="text-slate-600 dark:text-slate-400">Don't have an account? </span>
                   <Link to="/register" className="text-primary-500 font-medium hover:text-primary-400">
                     Sign up
                   </Link>

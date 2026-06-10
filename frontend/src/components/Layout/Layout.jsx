@@ -11,14 +11,14 @@ const Layout = () => {
   return (
     <div className="flex min-h-screen font-sans bg-transparent">
       {/* Mobile Header Top Bar */}
-      <div className="md:hidden fixed top-0 left-0 w-full h-16 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 z-40 px-4 flex justify-between items-center">
-        <h1 className="text-lg font-bold text-white flex items-center gap-2">
+      <div className="md:hidden fixed top-0 left-0 w-full h-16 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 z-40 px-4 flex justify-between items-center transition-colors duration-300">
+        <h1 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
           <Compass className="text-primary-500" size={24} />
           Placement AI
         </h1>
         <button 
           onClick={() => setIsMobileMenuOpen(true)}
-          className="text-slate-300 hover:text-white p-2"
+          className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white p-2"
         >
           <Menu size={28} />
         </button>
@@ -32,7 +32,7 @@ const Layout = () => {
       {/* Mobile Overlay */}
       {isMobileMenuOpen && (
         <div 
-          className="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-40 md:hidden transition-opacity" 
+          className="fixed inset-0 bg-slate-900/20 dark:bg-slate-900/80 backdrop-blur-sm z-40 md:hidden transition-opacity" 
           onClick={() => setIsMobileMenuOpen(false)} 
         />
       )}

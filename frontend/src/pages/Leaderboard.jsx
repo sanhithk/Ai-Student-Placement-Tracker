@@ -29,14 +29,14 @@ const Leaderboard = () => {
   const getRankIcon = (index) => {
     switch (index) {
       case 0: return <Medal size={28} className="text-yellow-400" />;
-      case 1: return <Medal size={28} className="text-slate-300" />;
+      case 1: return <Medal size={28} className="text-slate-700 dark:text-slate-300" />;
       case 2: return <Medal size={28} className="text-amber-600" />;
       default: return <span className="text-xl font-bold text-slate-500 w-[28px] text-center">{index + 1}</span>;
     }
   };
 
   if (loading) {
-    return <div className="flex justify-center items-center h-64 text-slate-400">Loading Leaderboard...</div>;
+    return <div className="flex justify-center items-center h-64 text-slate-600 dark:text-slate-400">Loading Leaderboard...</div>;
   }
 
   return (
@@ -51,14 +51,14 @@ const Leaderboard = () => {
             <Trophy size={40} className="text-yellow-400" />
             Global Leaderboard
           </h1>
-          <p className="text-slate-400 mt-2 text-lg">Compete with your peers, maintain your streak, and top the charts.</p>
+          <p className="text-slate-600 dark:text-slate-400 mt-2 text-lg">Compete with your peers, maintain your streak, and top the charts.</p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <Card className="lg:col-span-2 border-slate-700/50 bg-slate-800/40 backdrop-blur-xl">
+        <Card className="lg:col-span-2 border-slate-200/50 dark:border-slate-700/50 bg-slate-50/40 dark:bg-slate-800/40 backdrop-blur-xl">
           <CardHeader>
-            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <h2 className="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <TrendingUp size={20} className="text-primary-400" /> Top Performers
             </h2>
           </CardHeader>
@@ -77,12 +77,12 @@ const Leaderboard = () => {
                       {getRankIcon(index)}
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-slate-200 flex items-center gap-2">
+                      <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-2">
                         {u.name} {user?._id === u._id && <span className="text-xs px-2 py-0.5 rounded-full bg-primary-500/20 text-primary-400">You</span>}
                       </h3>
                       <div className="flex gap-2 mt-1">
                         {u.badges?.slice(0, 3).map((badge, i) => (
-                          <span key={i} className="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">
+                          <span key={i} className="text-xs px-2 py-0.5 rounded-full bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
                             {badge.replace(/_/g, ' ')}
                           </span>
                         ))}
@@ -91,41 +91,41 @@ const Leaderboard = () => {
                   </div>
                   <div className="flex items-center gap-8 text-right">
                     <div>
-                      <p className="text-sm text-slate-400">Streak</p>
+                      <p className="text-sm text-slate-600 dark:text-slate-400">Streak</p>
                       <p className="text-lg font-bold text-orange-400 flex items-center justify-end gap-1">
                         <Flame size={18} /> {u.currentStreak}
                       </p>
                     </div>
                     <div className="w-20">
-                      <p className="text-sm text-slate-400">Points</p>
-                      <p className="text-xl font-black text-white">{u.points}</p>
+                      <p className="text-sm text-slate-600 dark:text-slate-400">Points</p>
+                      <p className="text-xl font-black text-slate-900 dark:text-white">{u.points}</p>
                     </div>
                   </div>
                 </motion.div>
               ))}
               {users.length === 0 && (
-                <div className="p-8 text-center text-slate-400">No users found. Be the first to complete a challenge!</div>
+                <div className="p-8 text-center text-slate-600 dark:text-slate-400">No users found. Be the first to complete a challenge!</div>
               )}
             </div>
           </CardBody>
         </Card>
 
         <div className="space-y-6">
-          <Card className="border-slate-700/50 bg-gradient-to-b from-slate-800/80 to-slate-900/80">
+          <Card className="border-slate-200/50 dark:border-slate-700/50 bg-gradient-to-b from-slate-800/80 to-slate-900/80">
             <CardBody className="text-center py-8">
               <div className="w-20 h-20 mx-auto bg-primary-500/20 rounded-full flex items-center justify-center mb-4">
                 <Sparkles size={32} className="text-primary-400" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">How to climb?</h3>
-              <p className="text-slate-400 text-sm leading-relaxed">
+              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">How to climb?</h3>
+              <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                 Complete your Daily Challenges from the Dashboard to earn points. Maintain consecutive days to multiply your streak and unlock exclusive badges!
               </p>
             </CardBody>
           </Card>
           
-          <Card className="border-slate-700/50 bg-slate-800/40">
+          <Card className="border-slate-200/50 dark:border-slate-700/50 bg-slate-50/40 dark:bg-slate-800/40">
             <CardHeader>
-              <h3 className="text-lg font-semibold text-white flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
                 <Award size={18} className="text-emerald-400" /> Badge Showcase
               </h3>
             </CardHeader>
@@ -135,7 +135,7 @@ const Leaderboard = () => {
                   <Flame size={20} className="text-orange-400" />
                 </div>
                 <div>
-                  <h4 className="text-slate-200 text-sm font-medium">7 Day Streak</h4>
+                  <h4 className="text-slate-800 dark:text-slate-200 text-sm font-medium">7 Day Streak</h4>
                   <p className="text-slate-500 text-xs">Complete 7 daily challenges in a row</p>
                 </div>
               </div>
@@ -144,7 +144,7 @@ const Leaderboard = () => {
                   <Trophy size={20} className="text-primary-400" />
                 </div>
                 <div>
-                  <h4 className="text-slate-200 text-sm font-medium">First Blood</h4>
+                  <h4 className="text-slate-800 dark:text-slate-200 text-sm font-medium">First Blood</h4>
                   <p className="text-slate-500 text-xs">Complete your very first challenge</p>
                 </div>
               </div>
@@ -153,7 +153,7 @@ const Leaderboard = () => {
                   <Medal size={20} className="text-purple-400" />
                 </div>
                 <div>
-                  <h4 className="text-slate-200 text-sm font-medium">30 Day Streak</h4>
+                  <h4 className="text-slate-800 dark:text-slate-200 text-sm font-medium">30 Day Streak</h4>
                   <p className="text-slate-500 text-xs">Unstoppable consistency</p>
                 </div>
               </div>
