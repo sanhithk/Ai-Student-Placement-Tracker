@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-import { Building2, ArrowLeft, CheckCircle, Target, BookOpen, Layers, MessageSquare, AlertCircle, TrendingUp } from 'lucide-react';
+import { Building2, ArrowLeft, CheckCircle, Target, BookOpen, Layers, MessageSquare, AlertCircle, TrendingUp, Sparkles, RefreshCw, Milestone } from 'lucide-react';
 import Card, { CardHeader, CardBody } from '../components/UI/Card';
 import { motion } from 'framer-motion';
 
@@ -10,6 +10,24 @@ const CompanyProfile = () => {
   const [company, setCompany] = useState(null);
   const [matchData, setMatchData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [roadmapData, setRoadmapData] = useState(null);
+  const [roadmapLoading, setRoadmapLoading] = useState(false);
+
+  const generateRoadmap = async () => {
+    setRoadmapLoading(true);
+    try {
+      const token = JSON.parse(localStorage.getItem('userInfo'))?.token;
+      const res = await axios.post(`/api/companies/${id}/roadmap`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setRoadmapData(res.data);
+    } catch (err) {
+      console.error(err);
+      alert('Failed to generate roadmap. Ensure you have an uploaded resume.');
+    } finally {
+      setRoadmapLoading(false);
+    }
+  };
 
   useEffect(() => {
     const fetchCompanyData = async () => {
@@ -74,6 +92,67 @@ const CompanyProfile = () => {
           </div>
         </div>
       </div>
+
+      {/* AI Roadmap Generator */}
+      <Card className="border-primary-900/30">
+        <CardHeader className="bg-primary-900/10 border-b border-primary-900/20 flex justify-between items-center">
+          <h3 className="text-lg font-semibold text-slate-200 flex items-center gap-2">
+            <Milestone size={20} className="text-primary-400" /> Personalized AI Roadmap
+          </h3>
+          {!roadmapData && (
+            <button onClick={generateRoadmap} disabled={roadmapLoading} className="bg-primary-600 hover:bg-primary-500 text-white text-xs px-4 py-2 rounded-lg font-bold flex items-center shadow-lg shadow-primary-900/20 disabled:opacity-50 transition-colors">
+              {roadmapLoading ? <><RefreshCw className="animate-spin w-4 h-4 mr-2" /> Generating...</> : <><Sparkles className="w-4 h-4 mr-2" /> Compare Resume & Generate</>}
+            </button>
+          )}
+        </CardHeader>
+        <CardBody className={roadmapData ? "p-6" : "p-12 text-center"}>
+          {!roadmapData ? (
+            <div className="text-slate-400">
+              <p>We'll analyze your latest parsed resume against {company.name}'s requirements and build a step-by-step preparation plan.</p>
+            </div>
+          ) : (
+            <div className="space-y-8 animate-in slide-in-from-bottom-4 duration-500">
+              {roadmapData.missingSkills && roadmapData.missingSkills.length > 0 && (
+                <div>
+                  <h4 className="text-red-400 font-bold mb-3 flex items-center gap-2">
+                    <AlertCircle size={18} /> Critical Missing Skills Found
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {roadmapData.missingSkills.map((skill, idx) => (
+                      <span key={idx} className="bg-red-900/20 border border-red-800/30 text-red-300 px-3 py-1 rounded-md text-sm">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              <div>
+                <h4 className="text-slate-200 font-bold mb-4">Your Step-by-Step Plan</h4>
+                <div className="space-y-4">
+                  {roadmapData.roadmap.map((step, idx) => (
+                    <motion.div 
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                      key={idx} 
+                      className="bg-slate-800/40 border border-slate-700/50 p-4 rounded-xl flex gap-4"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-primary-900/50 text-primary-400 flex items-center justify-center font-black shrink-0 border border-primary-500/20">
+                        {step.step}
+                      </div>
+                      <div>
+                        <h5 className="text-white font-bold mb-1">{step.title}</h5>
+                        <p className="text-slate-400 text-sm leading-relaxed">{step.description}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </CardBody>
+      </Card>
 
       {/* Insights */}
       {matchData.insights && matchData.insights.length > 0 && (

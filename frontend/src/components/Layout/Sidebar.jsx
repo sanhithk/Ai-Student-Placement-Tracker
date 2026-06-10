@@ -9,16 +9,16 @@ const Sidebar = ({ onClose }) => {
   const { logout } = useAuth();
   const navItems = [
     { name: 'Dashboard', path: '/', icon: <LayoutDashboard size={20} /> },
-    { name: 'Discover Jobs', path: '/discover', icon: <Sparkles size={20} className="text-primary-400" /> },
-    { name: 'Job Tracker', path: '/jobs', icon: <Briefcase size={20} /> },
-    { name: 'Resume Analyzer', path: '/resume', icon: <FileText size={20} /> },
-    { name: 'Coding Stats', path: '/coding', icon: <Code size={20} /> },
-    { name: 'Roadmap', path: '/roadmap', icon: <Compass size={20} /> },
-    { name: 'Proof of Work', path: '/pow', icon: <Zap size={20} className="text-amber-400" /> },
-    { name: 'Mock Interview', path: '/interview', icon: <Video size={20} /> },
-    { name: 'Leaderboard', path: '/leaderboard', icon: <Trophy size={20} className="text-yellow-400" /> },
     { name: 'Placement Readiness', path: '/readiness', icon: <Target size={20} className="text-emerald-400" /> },
     { name: 'Company Hub', path: '/companies', icon: <Building2 size={20} className="text-sky-400" /> },
+    { name: 'Resume Analyzer', path: '/resume', icon: <FileText size={20} /> },
+    { name: 'Mock Interview', path: '/interview', icon: <Video size={20} /> },
+    { name: 'Roadmap', path: '/roadmap', icon: <Compass size={20} /> },
+    { name: 'Discover Jobs', path: '/discover', icon: <Sparkles size={20} className="text-primary-400" /> },
+    { name: 'Job Tracker', path: '/jobs', icon: <Briefcase size={20} /> },
+    { name: 'Coding Stats', path: '/coding', icon: <Code size={20} /> },
+    { name: 'Proof of Work', path: '/pow', icon: <Zap size={20} className="text-amber-400" /> },
+    { name: 'Leaderboard', path: '/leaderboard', icon: <Trophy size={20} className="text-yellow-400" /> },
   ];
 
 

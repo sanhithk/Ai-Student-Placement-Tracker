@@ -135,8 +135,7 @@ const PlacementReadiness = () => {
           </h3>
           {!aiRecs && (
             <Button onClick={getRecommendations} disabled={aiLoading} className="text-xs py-1.5 shadow-lg shadow-primary-900/20">
-              {aiLoading ? <RefreshCw className="animate-spin w-4 h-4 mr-2 inline" /> : 'Generate Plan'}
-              {!aiLoading && 'Generate Plan'}
+              {aiLoading ? <><RefreshCw className="animate-spin w-4 h-4 mr-2 inline" /> Generating...</> : 'Generate Plan'}
             </Button>
           )}
         </CardHeader>

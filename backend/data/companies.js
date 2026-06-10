@@ -2,7 +2,7 @@ const companies = [
   {
     id: 'google',
     name: 'Google',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg',
+    logoUrl: 'https://logo.clearbit.com/google.com',
     tier: 'MAANG',
     difficultyScore: 95,
     hiringWorkflow: [
@@ -25,7 +25,7 @@ const companies = [
   {
     id: 'amazon',
     name: 'Amazon',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg',
+    logoUrl: 'https://logo.clearbit.com/amazon.com',
     tier: 'MAANG',
     difficultyScore: 90,
     hiringWorkflow: [
@@ -47,7 +47,7 @@ const companies = [
   {
     id: 'microsoft',
     name: 'Microsoft',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
+    logoUrl: 'https://logo.clearbit.com/microsoft.com',
     tier: 'MAANG / Big Tech',
     difficultyScore: 88,
     hiringWorkflow: [
@@ -69,7 +69,7 @@ const companies = [
   {
     id: 'tcs',
     name: 'Tata Consultancy Services (TCS)',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Tata_Consultancy_Services_Logo.svg',
+    logoUrl: 'https://logo.clearbit.com/tcs.com',
     tier: 'Service Based (Mass Recruiter)',
     difficultyScore: 60,
     hiringWorkflow: [
@@ -91,7 +91,7 @@ const companies = [
   {
     id: 'infosys',
     name: 'Infosys',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg',
+    logoUrl: 'https://logo.clearbit.com/infosys.com',
     tier: 'Service Based',
     difficultyScore: 65,
     hiringWorkflow: [
@@ -111,7 +111,7 @@ const companies = [
   {
     id: 'accenture',
     name: 'Accenture',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg',
+    logoUrl: 'https://logo.clearbit.com/accenture.com',
     tier: 'Consulting / Tech',
     difficultyScore: 68,
     hiringWorkflow: [
@@ -132,7 +132,7 @@ const companies = [
   {
     id: 'deloitte',
     name: 'Deloitte',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/56/Deloitte.svg',
+    logoUrl: 'https://logo.clearbit.com/deloitte.com',
     tier: 'Big 4',
     difficultyScore: 75,
     hiringWorkflow: [
@@ -152,7 +152,7 @@ const companies = [
   {
     id: 'cognizant',
     name: 'Cognizant',
-    logoUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/43/Cognizant_logo_2022.svg',
+    logoUrl: 'https://logo.clearbit.com/cognizant.com',
     tier: 'Service Based',
     difficultyScore: 62,
     hiringWorkflow: [
