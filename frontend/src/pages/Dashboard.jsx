@@ -202,7 +202,7 @@ const Dashboard = () => {
       animate="show"
     >
       <motion.div variants={itemVariants}>
-        <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-primary-400">
+        <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-indigo-600 to-primary-600 dark:from-white dark:via-indigo-200 dark:to-primary-400 pb-2">
           Welcome back, {user?.name || 'Student'}!
         </h1>
         <p className="text-slate-600 dark:text-slate-400 mt-2 text-lg">Here is your live career progression overview.</p>

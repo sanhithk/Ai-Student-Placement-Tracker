@@ -4,6 +4,21 @@ import { Link } from 'react-router-dom';
 import Card, { CardBody } from '../components/UI/Card';
 import { Building2, ArrowRight, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { FaGoogle, FaAmazon, FaMicrosoft } from 'react-icons/fa';
+import { SiTata, SiInfosys, SiAccenture, SiCognizant } from 'react-icons/si';
+
+const getCompanyIcon = (id) => {
+  switch(id) {
+    case 'google': return <FaGoogle className="w-12 h-12 text-[#4285F4]" />;
+    case 'amazon': return <FaAmazon className="w-12 h-12 text-[#FF9900]" />;
+    case 'microsoft': return <FaMicrosoft className="w-12 h-12 text-[#00A4EF]" />;
+    case 'tcs': return <SiTata className="w-12 h-12 text-[#4b619e]" />;
+    case 'infosys': return <SiInfosys className="w-12 h-12 text-[#007CC3]" />;
+    case 'accenture': return <SiAccenture className="w-12 h-12 text-[#A100FF]" />;
+    case 'cognizant': return <SiCognizant className="w-12 h-12 text-[#0000A0]" />;
+    default: return <Building2 className="w-12 h-12 text-slate-400" />;
+  }
+};
 
 const CompanyHub = () => {
   const [companies, setCompanies] = useState([]);
@@ -49,11 +64,11 @@ const CompanyHub = () => {
             >
               <Card className="h-full bg-white/50 dark:bg-slate-900/50 hover:bg-slate-50/80 dark:bg-slate-800/80 hover:border-primary-500/50 transition-all duration-300 cursor-pointer group">
                 <CardBody className="p-6 flex flex-col items-center text-center h-full">
-                  <div className="w-20 h-20 bg-white rounded-2xl p-4 flex items-center justify-center shadow-lg shadow-black/50 mb-6">
-                    <img src={company.logoUrl} alt={company.name} className="max-w-full max-h-full object-contain" />
+                  <div className="w-20 h-20 bg-white dark:bg-slate-800 rounded-2xl p-4 flex items-center justify-center shadow-lg shadow-slate-200/50 dark:shadow-black/50 mb-6">
+                    {getCompanyIcon(company.id)}
                   </div>
-                  <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary-400 transition-colors">{company.name}</h2>
-                  <span className="text-xs font-medium text-slate-600 dark:text-slate-400 bg-slate-50 dark:bg-slate-800 px-2 py-1 rounded-full mb-4">
+                  <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-primary-500 transition-colors">{company.name}</h2>
+                  <span className="text-xs font-medium text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800/80 px-2 py-1 rounded-full mb-4">
                     {company.tier}
                   </span>
                   

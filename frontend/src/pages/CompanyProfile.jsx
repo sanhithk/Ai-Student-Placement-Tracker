@@ -2,8 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import { Building2, ArrowLeft, CheckCircle, Target, BookOpen, Layers, MessageSquare, AlertCircle, TrendingUp, Sparkles, RefreshCw, Milestone } from 'lucide-react';
+import { FaGoogle, FaAmazon, FaMicrosoft } from 'react-icons/fa';
+import { SiTata, SiInfosys, SiAccenture, SiCognizant } from 'react-icons/si';
 import Card, { CardHeader, CardBody } from '../components/UI/Card';
 import { motion } from 'framer-motion';
+
+const getCompanyIcon = (id) => {
+  switch(id) {
+    case 'google': return <FaGoogle className="w-16 h-16 text-[#4285F4]" />;
+    case 'amazon': return <FaAmazon className="w-16 h-16 text-[#FF9900]" />;
+    case 'microsoft': return <FaMicrosoft className="w-16 h-16 text-[#00A4EF]" />;
+    case 'tcs': return <SiTata className="w-16 h-16 text-[#4b619e]" />;
+    case 'infosys': return <SiInfosys className="w-16 h-16 text-[#007CC3]" />;
+    case 'accenture': return <SiAccenture className="w-16 h-16 text-[#A100FF]" />;
+    case 'cognizant': return <SiCognizant className="w-16 h-16 text-[#0000A0]" />;
+    default: return <Building2 className="w-16 h-16 text-slate-400" />;
+  }
+};
 
 const CompanyProfile = () => {
   const { id } = useParams();
@@ -60,8 +75,8 @@ const CompanyProfile = () => {
 
       {/* Header section */}
       <div className="flex flex-col md:flex-row items-center md:items-start gap-8 bg-white/50 dark:bg-slate-900/50 p-8 rounded-3xl border border-slate-200 dark:border-slate-800">
-        <div className="w-32 h-32 bg-white rounded-2xl p-6 flex items-center justify-center shadow-lg shadow-black/50 shrink-0">
-          <img src={company.logoUrl} alt={company.name} className="max-w-full max-h-full object-contain" />
+        <div className="w-32 h-32 bg-white dark:bg-slate-800 rounded-2xl p-6 flex items-center justify-center shadow-lg shadow-slate-200/50 dark:shadow-black/50 shrink-0">
+          {getCompanyIcon(company.id)}
         </div>
         <div className="flex-1 text-center md:text-left space-y-2">
           <h1 className="text-4xl font-black text-slate-900 dark:text-white">{company.name}</h1>
