@@ -2,7 +2,7 @@ const companies = [
   {
     id: 'google',
     name: 'Google',
-    logoUrl: 'https://logo.clearbit.com/google.com',
+    logoUrl: 'https://ui-avatars.com/api/?name=Google&background=4285F4&color=fff&size=128&bold=true',
     tier: 'MAANG',
     difficultyScore: 95,
     hiringWorkflow: [
@@ -25,7 +25,7 @@ const companies = [
   {
     id: 'amazon',
     name: 'Amazon',
-    logoUrl: 'https://logo.clearbit.com/amazon.com',
+    logoUrl: 'https://ui-avatars.com/api/?name=Amazon&background=FF9900&color=fff&size=128&bold=true',
     tier: 'MAANG',
     difficultyScore: 90,
     hiringWorkflow: [
@@ -47,7 +47,7 @@ const companies = [
   {
     id: 'microsoft',
     name: 'Microsoft',
-    logoUrl: 'https://logo.clearbit.com/microsoft.com',
+    logoUrl: 'https://ui-avatars.com/api/?name=Microsoft&background=00A4EF&color=fff&size=128&bold=true',
     tier: 'MAANG / Big Tech',
     difficultyScore: 88,
     hiringWorkflow: [
@@ -69,7 +69,7 @@ const companies = [
   {
     id: 'tcs',
     name: 'Tata Consultancy Services (TCS)',
-    logoUrl: 'https://logo.clearbit.com/tcs.com',
+    logoUrl: 'https://ui-avatars.com/api/?name=TCS&background=111827&color=fff&size=128&bold=true',
     tier: 'Service Based (Mass Recruiter)',
     difficultyScore: 60,
     hiringWorkflow: [
@@ -91,7 +91,7 @@ const companies = [
   {
     id: 'infosys',
     name: 'Infosys',
-    logoUrl: 'https://logo.clearbit.com/infosys.com',
+    logoUrl: 'https://ui-avatars.com/api/?name=Infosys&background=007CC3&color=fff&size=128&bold=true',
     tier: 'Service Based',
     difficultyScore: 65,
     hiringWorkflow: [
@@ -111,7 +111,7 @@ const companies = [
   {
     id: 'accenture',
     name: 'Accenture',
-    logoUrl: 'https://logo.clearbit.com/accenture.com',
+    logoUrl: 'https://ui-avatars.com/api/?name=Accenture&background=A100FF&color=fff&size=128&bold=true',
     tier: 'Consulting / Tech',
     difficultyScore: 68,
     hiringWorkflow: [
@@ -132,7 +132,7 @@ const companies = [
   {
     id: 'deloitte',
     name: 'Deloitte',
-    logoUrl: 'https://logo.clearbit.com/deloitte.com',
+    logoUrl: 'https://ui-avatars.com/api/?name=Deloitte&background=86BC25&color=fff&size=128&bold=true',
     tier: 'Big 4',
     difficultyScore: 75,
     hiringWorkflow: [
@@ -152,7 +152,7 @@ const companies = [
   {
     id: 'cognizant',
     name: 'Cognizant',
-    logoUrl: 'https://logo.clearbit.com/cognizant.com',
+    logoUrl: 'https://ui-avatars.com/api/?name=Cognizant&background=0000A0&color=fff&size=128&bold=true',
     tier: 'Service Based',
     difficultyScore: 62,
     hiringWorkflow: [
