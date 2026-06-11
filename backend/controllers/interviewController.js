@@ -8,7 +8,7 @@ const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 // @route   POST /api/interview/next
 // @access  Private
 const generateNextQuestion = asyncHandler(async (req, res) => {
-  const { topic, history } = req.body;
+  const { topic, history, userName = "Candidate" } = req.body;
 
   if (!topic) {
     res.status(400);
@@ -20,7 +20,7 @@ const generateNextQuestion = asyncHandler(async (req, res) => {
     
     if (!history || history.length === 0) {
       prompt = `You are an expert technical interviewer conducting a mock interview on the topic: "${topic}". 
-Please start the interview by introducing yourself warmly, welcoming the candidate, and asking the very first interview question. Keep it concise (2-3 sentences max). Output ONLY what the Interviewer should say.`;
+Please start the interview by introducing yourself warmly, greeting the candidate by their name: "${userName}" (e.g. "Hi, Good morning ${userName}"). Then ask the very first interview question. Keep it concise (2-3 sentences max). Output ONLY what the Interviewer should say.`;
     } else {
       const transcript = history.map(msg => `${msg.role === 'ai' ? 'Interviewer' : 'Candidate'}: ${msg.text}`).join('\n\n');
       prompt = `You are an expert technical interviewer conducting a mock interview on the topic: "${topic}".
@@ -54,7 +54,7 @@ const evaluateInterview = asyncHandler(async (req, res) => {
   try {
     const transcript = history.map(h => `${h.role === 'ai' ? 'Interviewer' : 'Candidate'}: ${h.text}`).join('\n\n');
     
-    const prompt = `You are an expert technical recruiter. Review the following 5-minute mock interview transcript for the topic "${topic}".
+    const prompt = `You are an expert technical recruiter. Review the following 10-minute mock interview transcript for the topic "${topic}".
 Provide a structured JSON response evaluating the candidate's performance.
 Do NOT wrap the response in markdown blocks like \`\`\`json. Return ONLY raw JSON.
 
