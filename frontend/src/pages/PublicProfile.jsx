@@ -39,7 +39,7 @@ const PublicProfile = () => {
         {/* Header section */}
         <div className="text-center space-y-4">
           <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-primary-900/30 text-primary-400 text-sm font-medium border border-primary-900/50 mb-2">
-            AI Placement Tracker Public Profile
+            PlaceTrack Public Profile
           </div>
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-sky-400">

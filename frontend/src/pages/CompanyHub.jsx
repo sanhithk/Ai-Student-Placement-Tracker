@@ -10,7 +10,7 @@ import { SiTata, SiInfosys, SiAccenture, SiCognizant } from 'react-icons/si';
 const getCompanyIcon = (id) => {
   switch(id) {
     case 'google': return <FaGoogle className="w-12 h-12 text-[#4285F4]" />;
-    case 'amazon': return <FaAmazon className="w-12 h-12 text-[#FF9900]" />;
+    case 'amazon': return <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg" alt="Amazon" className="w-12 h-12 object-contain" />;
     case 'microsoft': return <FaMicrosoft className="w-12 h-12 text-[#00A4EF]" />;
     case 'tcs': return <SiTata className="w-12 h-12 text-[#4b619e]" />;
     case 'infosys': return <SiInfosys className="w-12 h-12 text-[#007CC3]" />;

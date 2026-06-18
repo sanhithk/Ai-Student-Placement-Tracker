@@ -34,7 +34,7 @@ const Sidebar = ({ onClose }) => {
           >
             <Compass className="text-primary-500" />
           </motion.div>
-          Placement AI
+          PlaceTrack
         </h1>
         <button onClick={onClose} className="md:hidden text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white p-2">
           <X size={24} />

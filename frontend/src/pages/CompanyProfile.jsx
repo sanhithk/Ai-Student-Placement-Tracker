@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 const getCompanyIcon = (id) => {
   switch(id) {
     case 'google': return <FaGoogle className="w-16 h-16 text-[#4285F4]" />;
-    case 'amazon': return <FaAmazon className="w-16 h-16 text-[#FF9900]" />;
+    case 'amazon': return <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Amazon_icon.svg" alt="Amazon" className="w-16 h-16 object-contain" />;
     case 'microsoft': return <FaMicrosoft className="w-16 h-16 text-[#00A4EF]" />;
     case 'tcs': return <SiTata className="w-16 h-16 text-[#4b619e]" />;
     case 'infosys': return <SiInfosys className="w-16 h-16 text-[#007CC3]" />;

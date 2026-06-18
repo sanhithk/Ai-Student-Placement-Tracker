@@ -1,4 +1,4 @@
-# AI-Powered Student Career & Placement Tracker
+# PlaceTrack
 
 A production-ready full-stack web application built on the MERN stack. This application serves as a comprehensive platform for students to track job applications, analyze their resumes using AI, monitor coding progress, and get actionable feedback to secure top internships and jobs.
 

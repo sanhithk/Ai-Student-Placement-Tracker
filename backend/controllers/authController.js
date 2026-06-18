@@ -152,7 +152,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
     
     await sendEmail({
       email: user.email,
-      subject: 'Password Reset Code - AI Placement Tracker',
+      subject: 'Password Reset Code - PlaceTrack',
       message,
     });
 
